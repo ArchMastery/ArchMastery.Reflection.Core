@@ -34,6 +34,15 @@
     <Content Include="TestAssemblies\TestAssembly.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="obj\**" />
   </ItemGroup>
 
 </Project>

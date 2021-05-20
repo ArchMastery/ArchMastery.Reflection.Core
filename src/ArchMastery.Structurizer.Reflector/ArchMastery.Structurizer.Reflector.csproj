@@ -18,5 +18,12 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
+        <Compile Remove="obj\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Remove="obj\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="obj\**" />
     </ItemGroup>
 </Project>
