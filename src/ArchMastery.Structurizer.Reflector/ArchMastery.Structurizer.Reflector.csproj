@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>netcoreapp3.1;netstandard2.0;net5.0</TargetFrameworks>
+        <AssemblyVersion>2021.0514.0.42598</AssemblyVersion>
+        <FileVersion>2021.0514.0.42598</FileVersion>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <Authors>The Sharp Ninja &lt;ninja@thesharp.ninja&gt;</Authors>
+        <Description>Generate UML Class Diagrams with Structurizer by reflecting over Dotnet Assemblies.</Description>
+        <Copyright>2021</Copyright>
+        <PackageProjectUrl>https://github.com/sharpninja/Arch.Structurizer.Reflector</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/sharpninja/Arch.Structurizer.Reflector</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>uml; plant uml;</PackageTags>
+        <NeutralLanguage>en</NeutralLanguage>
+        <Version>$(AssemblyVersion)</Version>
+        <LangVersion>9.0</LangVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
+    </ItemGroup>
+</Project>

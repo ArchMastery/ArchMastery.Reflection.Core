@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "ArchMastery.Structurizer.Reflector/2021.0514.0.42598": {
+        "runtime": {
+          "ArchMastery.Structurizer.Reflector.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ArchMastery.Structurizer.Reflector/2021.0514.0.42598": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
