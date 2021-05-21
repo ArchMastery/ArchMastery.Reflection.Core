@@ -11,10 +11,15 @@
     <PackageTags>Structurizer UML C4Diagram</PackageTags>
     <RootNamespace>ArchMastery.Reflector.Core</RootNamespace>
     <PackageLicenseUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core/blob/master/LICENSE.md</PackageLicenseUrl>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GPS.SimpleThreading" Version="3.0.1"/>
+    <PackageReference Include="GitVersion.MsBuild" Version="5.6.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="GPS.SimpleThreading" Version="3.0.1" />
   </ItemGroup>
   
 

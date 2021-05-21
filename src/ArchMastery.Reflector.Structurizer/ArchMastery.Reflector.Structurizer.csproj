@@ -14,6 +14,7 @@
         <Version>$(AssemblyVersion)</Version>
         <LangVersion>9.0</LangVersion>
         <RootNamespace>ArchMastery.Structurizer.Reflector</RootNamespace>
+        <Version>1.0.0</Version>
     </PropertyGroup>
     <ItemGroup>
         <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
@@ -30,5 +31,11 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\ArchMastery.Reflector.Core\ArchMastery.Reflector.Core.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="GitVersion.MsBuild" Version="5.6.9">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
     </ItemGroup>
 </Project>

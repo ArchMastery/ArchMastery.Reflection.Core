@@ -49,7 +49,7 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
             types = types.Where(t => t.GetCustomAttribute(typeof(CompilerGeneratedAttribute)) is null);
 
             var grouped = types
-                         .GroupBy(c => $"{c.NormalizeName().AsSlug()}")
+                         .GroupBy(c => $"{c.NormalizeName()!.AsSlug()}")
                          .Select(group =>
                                      (Path.Combine(directoryInfo.FullName, group.Key.AsSlug() + ".puml"), group))
                          .Select(pair => pair.group.Key)
@@ -193,7 +193,7 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
                    .ToList();
 
             var grouped = types
-                         .GroupBy(c => $"{c.NormalizeName().AsSlug()}")
+                         .GroupBy(c => $"{c.NormalizeName()!.AsSlug()}")
                          .Select(group =>
                                      (Path.Combine(directoryInfo.FullName, group.Key.AsSlug() + ".puml"), group))
                          .Select(pair => pair.group.Key)
@@ -208,7 +208,7 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
 
             result.Should().NotBeNullOrEmpty();
 
-            var slugs = types.Select(type => new { Type = type, Slug = type.NormalizeName().AsSlug()}).ToList();
+            var slugs = types.Select(type => new { Type = type, Slug = type.NormalizeName()!.AsSlug()}).ToList();
 
             List<(TypeHolder<StructurizerClip, StructurizerGenerator>, string)> duplicates = new();
 
@@ -332,7 +332,7 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
                           });
 
             var result = assemblies.WriteAll<StructurizerClip, StructurizerGenerator>(
-                                                   directoryInfo,
+                                                   directoryInfo!,
                                                    WriteStrategy.OneFilePerAssembly,
                                                    layers,
                                                    includeAttributes);
@@ -365,7 +365,7 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
             types = types.Where(t => t.GetCustomAttribute(typeof(CompilerGeneratedAttribute)) is null).ToList();
 
             var grouped = types
-                         .GroupBy(c => $"{c.NormalizeName().AsSlug()}")
+                         .GroupBy(c => $"{c.NormalizeName()!.AsSlug()}")
                          .ToList();
 
             var result = results.GroupBy(i => i.clip.Namespace + "." + i.clip.TypeName).ToList();

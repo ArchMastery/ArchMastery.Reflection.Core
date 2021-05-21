@@ -21,6 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
 using System;
+// ReSharper disable IdentifierTypo
+#pragma warning disable 8618
 
 // ReSharper disable InheritdocConsiderUsage
 
