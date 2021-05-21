@@ -11,9 +11,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Initialize GitVersion
       run: |
-      git fetch --tags
-      git branch --create-reflog main origin/master
+        git fetch --tags
+        git branch --create-reflog main origin/master
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
