@@ -16,7 +16,7 @@ jobs:
     - name: Initialize GitVersion
       run: |
         git fetch --tags
-        git branch --create-reflog main origin/master
+        git branch --create-reflog master origin/master
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -32,20 +32,17 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - uses: fabriciomurta/ensure-nuget-source@v1
+      name: Setup Nuget for Nuget.org
+      with:
+        name: 'nuget.org'
+        url: 'https://api.nuget.org/v3/index.json'
     - name: Publish ArchMastery.Reflector.Core to NUGET
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
         NO_BUILD: true
         NUGET_KEY: ${{ secrets.NUGET }}
-        INCLUDE_SYMBOLS: false
-    - name: Publish ArchMastery.Reflector.Core to GitHub
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
-        NO_BUILD: true
-        NUGET_SOURCE: https://nuget.pkg.github.com/ArchMastery
-        NUGET_KEY: ${{ secrets.GITHUB_TOKEN }}
         INCLUDE_SYMBOLS: false
     - name: Publish ArchMastery.Reflector.Structurizer to Nuget
       uses: brandedoutcast/publish-nuget@v2.5.5
@@ -54,11 +51,22 @@ jobs:
         NO_BUILD: true
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: false
+    - uses: fabriciomurta/ensure-nuget-source@v1
+      name: Setup Nuget for Github
+        with:
+          name: 'GitHub'
+          url: 'https://nuget.pkg.github.com/ArchMastery/v3/index.json'
+    - name: Publish ArchMastery.Reflector.Core to GitHub
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
+        NO_BUILD: true
+        NUGET_KEY: ${{ secrets.GITHUB_TOKEN }}
+        INCLUDE_SYMBOLS: false
     - name: Publish ArchMastery.Reflector.Structurizer to GitHub
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
         NO_BUILD: true
-        NUGET_SOURCE: https://nuget.pkg.github.com/ArchMastery
         NUGET_KEY: ${{ secrets.GITHUB_TOKEN }}
         INCLUDE_SYMBOLS: false
