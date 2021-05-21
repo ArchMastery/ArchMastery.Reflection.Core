@@ -14,7 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\GPS\SimpleThreading\src\GPS.SimpleThreading\GPS.SimpleThreading.csproj" />
+    <PackageReference Include="GPS.SimpleThreading" Version="3.0.1"/>
   </ItemGroup>
+  
 
 </Project>
