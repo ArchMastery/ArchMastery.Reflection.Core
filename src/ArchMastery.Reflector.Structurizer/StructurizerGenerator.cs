@@ -1,6 +1,5 @@
 #nullable enable
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -9,7 +8,7 @@ using ArchMastery.Reflector.Core;
 using ArchMastery.Reflector.Core.Base;
 using MemberTypes = ArchMastery.Reflector.Core.Base.MemberTypes;
 
-namespace ArchMastery.Structurizer.Reflector
+namespace ArchMastery.Reflector.Structurizer
 {
     public class StructurizerGenerator : GeneratorBase<StructurizerClip>
     {

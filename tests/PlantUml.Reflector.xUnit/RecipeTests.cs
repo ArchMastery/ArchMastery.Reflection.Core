@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using ArchMastery.Reflector.Core;
 using ArchMastery.Reflector.Core.Enums;
+using ArchMastery.Reflector.Structurizer;
 using Divergic.Logging.Xunit;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;

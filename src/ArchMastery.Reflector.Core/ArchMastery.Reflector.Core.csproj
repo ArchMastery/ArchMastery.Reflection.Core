@@ -10,8 +10,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>Structurizer UML C4Diagram</PackageTags>
     <RootNamespace>ArchMastery.Reflector.Core</RootNamespace>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <PackageLicenseUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core/blob/master/LICENSE.md</PackageLicenseUrl>
-    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using ArchMastery.Reflector.Core;
 using ArchMastery.Reflector.Core.Enums;
+using ArchMastery.Reflector.Structurizer;
 using Divergic.Logging.Xunit;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;

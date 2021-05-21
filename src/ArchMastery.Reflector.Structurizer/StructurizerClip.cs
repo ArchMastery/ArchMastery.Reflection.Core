@@ -1,8 +1,7 @@
-﻿using System.Reflection;
-using ArchMastery.Reflector.Core.Base;
+﻿using ArchMastery.Reflector.Core.Base;
 using ArchMastery.Reflector.Core.Enums;
 
-namespace ArchMastery.Structurizer.Reflector
+namespace ArchMastery.Reflector.Structurizer
 {
     public class StructurizerClip : ClipBase
     {
