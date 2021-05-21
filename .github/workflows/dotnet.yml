@@ -32,17 +32,33 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Publish NuGet
+    - name: Publish ArchMastery.Reflector.Core to NUGET
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
         NO_BUILD: true
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: false
-    - name: Publish NuGet
+    - name: Publish ArchMastery.Reflector.Core to GitHub
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
+        NO_BUILD: true
+        NUGET_SOURCE: https://nuget.pkg.github.com/ArchMastery/index.json
+        NUGET_KEY: ${{ secrets.GITHUB_TOKEN }}
+        INCLUDE_SYMBOLS: false
+    - name: Publish ArchMastery.Reflector.Structurizer to Nuget
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
         NO_BUILD: true
         NUGET_KEY: ${{ secrets.NUGET }}
+        INCLUDE_SYMBOLS: false
+    - name: Publish ArchMastery.Reflector.Structurizer to GitHub
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
+        NO_BUILD: true
+        NUGET_SOURCE: https://nuget.pkg.github.com/ArchMastery/index.json
+        NUGET_KEY: ${{ secrets.GITHUB_TOKEN }}
         INCLUDE_SYMBOLS: false
