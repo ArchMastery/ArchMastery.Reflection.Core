@@ -53,9 +53,9 @@ jobs:
         INCLUDE_SYMBOLS: false
     - uses: fabriciomurta/ensure-nuget-source@v1
       name: Setup Nuget for Github
-        with:
-          name: 'GitHub'
-          url: 'https://nuget.pkg.github.com/ArchMastery/v3/index.json'
+      with:
+        name: 'GitHub'
+        url: 'https://nuget.pkg.github.com/ArchMastery/v3/index.json'
     - name: Publish ArchMastery.Reflector.Core to GitHub
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
