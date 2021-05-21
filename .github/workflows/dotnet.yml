@@ -32,11 +32,6 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - uses: fabriciomurta/ensure-nuget-source@v1
-      name: Setup Nuget for Nuget.org
-      with:
-        name: 'nuget.org'
-        url: 'https://api.nuget.org/v3/index.json'
     - name: Publish ArchMastery.Reflector.Core to NUGET
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
@@ -51,22 +46,9 @@ jobs:
         NO_BUILD: true
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: false
-    - uses: fabriciomurta/ensure-nuget-source@v1
-      name: Setup Nuget for Github
-      with:
-        name: 'GitHub'
-        url: 'https://nuget.pkg.github.com/ArchMastery/v3/index.json'
-    - name: Publish ArchMastery.Reflector.Core to GitHub
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
-        NO_BUILD: true
-        NUGET_KEY: ${{ secrets.GITHUB_TOKEN }}
-        INCLUDE_SYMBOLS: false
-    - name: Publish ArchMastery.Reflector.Structurizer to GitHub
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
-        NO_BUILD: true
-        NUGET_KEY: ${{ secrets.GITHUB_TOKEN }}
-        INCLUDE_SYMBOLS: false
+    - name: Publish to GitHub Nuget Feed
+      run: |
+        nugest sources Add -Name GitHub -Source https://nuget.pkg.github.com/ArchMastery/v3/index.json
+        nuget setapikey ${{ secrets.GITHUB_TOKEN }} -Source GitHub
+        nuget push ./ArchMastery.Reflector.Core*nupkg -Source GitHub
+        nuget push ./ArchMastery.Reflector.Structurizer*nupkg -Source GitHub
