@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      - run: |
+      run: |
       git fetch --tags
       git branch --create-reflog main origin/master
     - name: Setup .NET
