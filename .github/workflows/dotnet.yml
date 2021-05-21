@@ -18,7 +18,7 @@ jobs:
     - name: Install GitVersion
       run: dotnet tool install --global GitVersion.Tool
     - name: Run GitVersion
-      run: dotnet-gitversion /output buildserver /nofetch updateAssemblyInfo true
+      run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
