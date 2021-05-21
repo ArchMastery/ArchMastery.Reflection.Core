@@ -44,7 +44,7 @@ jobs:
       with:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
         NO_BUILD: true
-        NUGET_SOURCE: https://nuget.pkg.github.com/ArchMastery/index.json
+        NUGET_SOURCE: https://nuget.pkg.github.com/ArchMastery
         NUGET_KEY: ${{ secrets.GITHUB_TOKEN }}
         INCLUDE_SYMBOLS: false
     - name: Publish ArchMastery.Reflector.Structurizer to Nuget
@@ -59,6 +59,6 @@ jobs:
       with:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
         NO_BUILD: true
-        NUGET_SOURCE: https://nuget.pkg.github.com/ArchMastery/index.json
+        NUGET_SOURCE: https://nuget.pkg.github.com/ArchMastery
         NUGET_KEY: ${{ secrets.GITHUB_TOKEN }}
         INCLUDE_SYMBOLS: false
