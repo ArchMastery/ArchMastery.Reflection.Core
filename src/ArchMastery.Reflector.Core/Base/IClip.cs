@@ -2,9 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Reflection;
-using ArchMastery.Structurizer.Reflector.Common.Enums;
+using ArchMastery.Reflector.Core.Enums;
 
-namespace ArchMastery.Structurizer.Reflector.Common.Base
+namespace ArchMastery.Reflector.Core.Base
 {
     public interface IClip
     {

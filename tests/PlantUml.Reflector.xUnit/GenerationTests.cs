@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using ArchMastery.Structurizer.Reflector.Common;
-using ArchMastery.Structurizer.Reflector.Common.Enums;
+using ArchMastery.Reflector.Core;
+using ArchMastery.Reflector.Core.Enums;
 using Divergic.Logging.Xunit;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;

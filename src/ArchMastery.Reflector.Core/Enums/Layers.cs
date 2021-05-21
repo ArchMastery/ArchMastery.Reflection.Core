@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArchMastery.Structurizer.Reflector.Common.Enums
+namespace ArchMastery.Reflector.Core.Enums
 {
     [Flags]
     public enum Layers

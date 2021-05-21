@@ -5,9 +5,9 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using ArchMastery.Structurizer.Reflector.Common.Enums;
+using ArchMastery.Reflector.Core.Enums;
 
-namespace ArchMastery.Structurizer.Reflector.Common.Base
+namespace ArchMastery.Reflector.Core.Base
 {
     public abstract class ClipBase : IClip
     {

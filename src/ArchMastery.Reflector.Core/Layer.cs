@@ -1,7 +1,8 @@
-﻿using ArchMastery.Structurizer.Reflector.Common.Enums;
+﻿using ArchMastery.Reflector.Core.Enums;
+
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace ArchMastery.Structurizer.Reflector.Common
+namespace ArchMastery.Reflector.Core
 {
     public class Layer
     {

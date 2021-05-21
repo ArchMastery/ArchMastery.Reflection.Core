@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using ArchMastery.Structurizer.Reflector.Common.Base;
-using ArchMastery.Structurizer.Reflector.Common.Enums;
-using MemberTypes = ArchMastery.Structurizer.Reflector.Common.Base.MemberTypes;
-using static ArchMastery.Structurizer.Reflector.TypeExtensions;
+using ArchMastery.Reflector.Core.Base;
+using ArchMastery.Reflector.Core.Enums;
+using MemberTypes = ArchMastery.Reflector.Core.Base.MemberTypes;
+using static ArchMastery.Reflector.Core.TypeExtensions;
 // ReSharper disable MemberCanBePrivate.Global
 
 // ReSharper disable UnusedMember.Global
 
 #nullable enable
-namespace ArchMastery.Structurizer.Reflector.Common
+namespace ArchMastery.Reflector.Core
 {
     public class TypeHolder<TClip, TGenerator>
         where TClip : ClipBase, new()

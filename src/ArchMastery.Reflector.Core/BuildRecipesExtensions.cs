@@ -1,5 +1,5 @@
+#nullable enable
 using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -8,15 +8,15 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using ArchMastery.Structurizer.Reflector.Common.Base;
-using ArchMastery.Structurizer.Reflector.Common.Enums;
+using ArchMastery.Reflector.Core.Base;
+using ArchMastery.Reflector.Core.Enums;
 using GPS.SimpleThreading.Blocks;
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable SuggestBaseTypeForParameter
 // ReSharper disable ParameterTypeCanBeEnumerable.Local
 
-namespace ArchMastery.Structurizer.Reflector.Common
+namespace ArchMastery.Reflector.Core
 {
     public static class BuildRecipesExtensions
     {
@@ -101,11 +101,11 @@ namespace ArchMastery.Structurizer.Reflector.Common
                                    {
                                        if (task.IsCompleted && !task.IsFaulted)
                                        {
-                                           tuple.Value.result.ToList().ForEach(result.Add);
+                                           tuple?.result.ToList().ForEach(result.Add);
                                        }
                                        else
                                        {
-                                           throw task.Exception;
+                                           throw task.Exception!;
                                        }
                                    });
 
@@ -113,7 +113,7 @@ namespace ArchMastery.Structurizer.Reflector.Common
             {
                 ConcurrentBag<FileInfo> result = new();
 
-                var filename = group.Key.GetName().Name!.AsSlug();
+                var filename = group.Key?.GetName().Name!.AsSlug();
                 var typeFilename = Path.Combine(directoryInfo.FullName, $"{filename}.puml");
                 var fs = structuredWriter.WriteFile(typeFilename, group);
                 fs.Close();
@@ -147,11 +147,11 @@ namespace ArchMastery.Structurizer.Reflector.Common
                                    {
                                        if (task.IsCompleted && !task.IsFaulted)
                                        {
-                                           tuple.Value.result.ToList().ForEach(result.Add);
+                                           tuple?.result.ToList().ForEach(result.Add);
                                        }
                                        else
                                        {
-                                           throw task.Exception;
+                                           throw task.Exception!;
                                        }
                                    });
 
@@ -189,11 +189,11 @@ namespace ArchMastery.Structurizer.Reflector.Common
                                    {
                                        if (task.IsCompleted && !task.IsFaulted)
                                        {
-                                           tuple.Value.result.ToList().ForEach(result.Add);
+                                           tuple?.result.ToList().ForEach(result.Add);
                                        }
                                        else
                                        {
-                                           throw task.Exception;
+                                           throw task.Exception!;
                                        }
                                    });
 

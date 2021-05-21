@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ArchMastery.Structurizer.Reflector
+namespace ArchMastery.Reflector.Core
 {
     public static class StreamExtensions
     {

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using ArchMastery.Structurizer.Reflector.Common;
-using ArchMastery.Structurizer.Reflector.Common.Base;
-using MemberTypes = ArchMastery.Structurizer.Reflector.Common.Base.MemberTypes;
+using ArchMastery.Reflector.Core;
+using ArchMastery.Reflector.Core.Base;
+using MemberTypes = ArchMastery.Reflector.Core.Base.MemberTypes;
 
 namespace ArchMastery.Structurizer.Reflector
 {
@@ -40,7 +40,7 @@ namespace ArchMastery.Structurizer.Reflector
 
         /// <inheritdoc />
         public override string GetImplements(TypeInfo inheritsTypeInfo)
-            => $"{Slug} --() {inheritsTypeInfo.NormalizeName().AsSlug()} : implements";
+            => $"{Slug} --() {inheritsTypeInfo.NormalizeName()!.AsSlug()} : implements";
 
         public override string GetRelationships(FieldInfo field, string? fieldTypeName, string? arrayElementTypeName,
                                                 Type? genericCollectionType, string? genericCollectionTypeName)
@@ -48,8 +48,8 @@ namespace ArchMastery.Structurizer.Reflector
             return field.FieldType.IsArray
                        ? $"{Slug} o- {(arrayElementTypeName ?? "").AsSlug()} : {field.Name} << aggregation >> "
                        : genericCollectionType != typeof(object)
-                           ? $"{Slug} o- {genericCollectionTypeName.AsSlug()} : {field.Name} << aggregation >>"
-                           : $"{Slug} -> {fieldTypeName.AsSlug()} : {field.Name} << use >>";
+                           ? $"{Slug} o- {genericCollectionTypeName!.AsSlug()} : {field.Name} << aggregation >>"
+                           : $"{Slug} -> {fieldTypeName!.AsSlug()} : {field.Name} << use >>";
         }
 
         public override string GetRelationships(PropertyInfo property, string? propertyTypeName,
@@ -59,8 +59,8 @@ namespace ArchMastery.Structurizer.Reflector
             return property.PropertyType.IsArray
                        ? $"{Slug} o- {arrayElementTypeName?.AsSlug()} : {property.Name} << aggregation >>"
                        : genericCollectionType != typeof(object)
-                           ? $"{Slug} o- {genericCollectionTypeName.AsSlug()} : {property.Name} << aggregation >>"
-                           : $"{Slug} -> {propertyTypeName.AsSlug()} : {property.Name} << use >>";
+                           ? $"{Slug} o- {genericCollectionTypeName!.AsSlug()} : {property.Name} << aggregation >>"
+                           : $"{Slug} -> {propertyTypeName!.AsSlug()} : {property.Name} << use >>";
         }
 
         /// <inheritdoc />
@@ -167,12 +167,12 @@ namespace ArchMastery.Structurizer.Reflector
         private static string GetMemberTypeString(MemberTypes memberType)
             => memberType switch
                {
-                   MemberTypes.Ctor => "constructors",
-                   MemberTypes.Event => "events",
-                   MemberTypes.Field => "fields",
-                   MemberTypes.Method => "methods",
-                   MemberTypes.Attribute => "attributes",
-                   MemberTypes.Property => "properties",
+                   ArchMastery.Reflector.Core.Base.MemberTypes.Ctor => "constructors",
+                   ArchMastery.Reflector.Core.Base.MemberTypes.Event => "events",
+                   ArchMastery.Reflector.Core.Base.MemberTypes.Field => "fields",
+                   ArchMastery.Reflector.Core.Base.MemberTypes.Method => "methods",
+                   ArchMastery.Reflector.Core.Base.MemberTypes.Attribute => "attributes",
+                   ArchMastery.Reflector.Core.Base.MemberTypes.Property => "properties",
                    _ => ""
                };
 

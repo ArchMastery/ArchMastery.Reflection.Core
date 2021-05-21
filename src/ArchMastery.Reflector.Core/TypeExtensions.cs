@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace ArchMastery.Structurizer.Reflector
+namespace ArchMastery.Reflector.Core
 {
     public static class TypeExtensions
     {

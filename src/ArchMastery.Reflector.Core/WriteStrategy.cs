@@ -1,4 +1,4 @@
-namespace ArchMastery.Structurizer.Reflector.Common
+namespace ArchMastery.Reflector.Core
 {
     public enum WriteStrategy
     {

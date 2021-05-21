@@ -1,4 +1,4 @@
-namespace ArchMastery.Structurizer.Reflector.Common.Base
+namespace ArchMastery.Reflector.Core.Base
 {
     public enum MemberTypes
     {

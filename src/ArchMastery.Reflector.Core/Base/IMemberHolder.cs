@@ -1,9 +1,10 @@
-﻿using ArchMastery.Structurizer.Reflector.Common.Enums;
+﻿using ArchMastery.Reflector.Core.Enums;
+
 // ReSharper disable MemberCanBePrivate.Global
 
 #nullable enable
 
-namespace ArchMastery.Structurizer.Reflector.Common.Base
+namespace ArchMastery.Reflector.Core.Base
 {
     public interface IMemberHolder
     {

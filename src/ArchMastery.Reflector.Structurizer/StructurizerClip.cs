@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using ArchMastery.Structurizer.Reflector.Common.Base;
-using ArchMastery.Structurizer.Reflector.Common.Enums;
+using ArchMastery.Reflector.Core.Base;
+using ArchMastery.Reflector.Core.Enums;
 
 namespace ArchMastery.Structurizer.Reflector
 {

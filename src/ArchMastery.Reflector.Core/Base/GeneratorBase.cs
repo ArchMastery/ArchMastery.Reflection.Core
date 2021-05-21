@@ -6,11 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using ArchMastery.Structurizer.Reflector.Common.Enums;
+using ArchMastery.Reflector.Core.Enums;
 
 // ReSharper disable MemberCanBeProtected.Global
 
-namespace ArchMastery.Structurizer.Reflector.Common.Base
+namespace ArchMastery.Reflector.Core.Base
 {
     public abstract class GeneratorBase<TClip>
         where TClip : ClipBase, new()
@@ -22,7 +22,7 @@ namespace ArchMastery.Structurizer.Reflector.Common.Base
 
         public Type? ObjectType { get; init; }
 
-        public string? Slug => ObjectType?.NormalizeName().AsSlug();
+        public string? Slug => ObjectType?.NormalizeName()?.AsSlug();
         public string? DisplayName => ObjectType?.Name.NormalizeNameString();
         public string TypeFullName => _fullName ??= MakeFullName();
 

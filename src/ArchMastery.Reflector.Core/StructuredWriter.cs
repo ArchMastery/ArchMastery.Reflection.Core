@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using ArchMastery.Structurizer.Reflector.Common.Base;
-using ArchMastery.Structurizer.Reflector.Common.Enums;
+using ArchMastery.Reflector.Core.Base;
+using ArchMastery.Reflector.Core.Enums;
 
-namespace ArchMastery.Structurizer.Reflector
+namespace ArchMastery.Reflector.Core
 {
     public class StructuredWriter<TClip, TGenerator>
     where TClip : ClipBase, new()

@@ -5,10 +5,12 @@
     <LangVersion>9.0</LangVersion>
     <Title>Architecture Master Core</Title>
     <Copyright>(c) 2021 - The Sharp Ninja</Copyright>
-    <PackageProjectUrl>http://www.github.com</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Structurizer UML C4Diagram</PackageTags>
-    <RootNamespace>ArchMastery.Core</RootNamespace>
+    <RootNamespace>ArchMastery.Reflector.Core</RootNamespace>
+    <PackageLicenseUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core/blob/master/LICENSE.md</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
