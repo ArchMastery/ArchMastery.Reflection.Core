@@ -15,6 +15,7 @@
         <LangVersion>9.0</LangVersion>
         <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
         <RootNamespace>ArchMastery.Reflector.Structurizer</RootNamespace>
+        <Version>$(AssemblyInformationalVersion)</Version>
     </PropertyGroup>
     <ItemGroup>
         <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />

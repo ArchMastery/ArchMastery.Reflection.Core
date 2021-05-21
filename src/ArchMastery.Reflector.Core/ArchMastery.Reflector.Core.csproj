@@ -12,6 +12,7 @@
     <RootNamespace>ArchMastery.Reflector.Core</RootNamespace>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <PackageLicenseUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core/blob/master/LICENSE.md</PackageLicenseUrl>
+    <Version>$(AssemblyInformationalVersion)</Version>
   </PropertyGroup>
 
   <ItemGroup>
