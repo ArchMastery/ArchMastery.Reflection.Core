@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Gdf/ldbsIkH5jcij9RNAn8BOhy7pZgbKP0zEP1sUChzmWgz5u7KMujyWyLMyfo1uuStivM3DIlqSlqyqybtZDw==",
+  "dgSpecHash": "Hm6UpVpxcb1snlhNJBVW0I9fE/WUQHEpOydi2fI2k2EzOu1YaQBn3OsYY9JLb59FFPpholLnwV2WaUsTq33VcQ==",
   "success": true,
-  "projectFilePath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/ArchMastery.Structurizer.Reflector.xUnit.csproj",
+  "projectFilePath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/ArchMastery.Reflector.Structurizer.xUnit.csproj",
   "expectedPackageFiles": [
     "/home/ninja/.nuget/packages/coverlet.collector/1.3.0/coverlet.collector.1.3.0.nupkg.sha512",
     "/home/ninja/.nuget/packages/divergic.logging.xunit/3.6.0/divergic.logging.xunit.3.6.0.nupkg.sha512",

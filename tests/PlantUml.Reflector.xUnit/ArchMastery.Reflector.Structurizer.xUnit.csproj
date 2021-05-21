@@ -8,6 +8,10 @@
     <AssemblyVersion>2021.0514.0.42598</AssemblyVersion>
 
     <FileVersion>2021.0514.0.42598</FileVersion>
+
+    <Nullable>enable</Nullable>
+
+    <RootNamespace>ArchMastery.Structurizer.Reflector.xUnit</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,14 +30,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ArchMastery.Structurizer.Reflector\ArchMastery.Structurizer.Reflector.csproj" />
+    <ProjectReference Include="..\..\src\ArchMastery.Reflector.Structurizer\ArchMastery.Reflector.Structurizer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="TestAssemblies\TestAssembly.dll" />
-    <Content Include="TestAssemblies\TestAssembly.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Remove="obj\**" />
   </ItemGroup>
 
@@ -43,6 +44,18 @@
 
   <ItemGroup>
     <EmbeddedResource Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="TestAssemblies\FluentAssertions.dll" />
+    <Content Include="TestAssemblies\FluentAssertions.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="TestAssemblies\GtkSharp.dll" />
+    <None Remove="TestAssemblies\Newtonsoft.Json.dll" />
+    <Content Include="TestAssemblies\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

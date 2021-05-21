@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;netstandard2.0;net5.0</TargetFrameworks>
+    <LangVersion>9.0</LangVersion>
+    <Title>Architecture Master Core</Title>
+    <Copyright>(c) 2021 - The Sharp Ninja</Copyright>
+    <PackageProjectUrl>http://www.github.com</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Structurizer UML C4Diagram</PackageTags>
+    <RootNamespace>ArchMastery.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\GPS\SimpleThreading\src\GPS.SimpleThreading\GPS.SimpleThreading.csproj" />
+  </ItemGroup>
+
+</Project>

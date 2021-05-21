@@ -1778,14 +1778,40 @@
           "build/netcoreapp2.1/xunit.runner.visualstudio.props": {}
         }
       },
-      "ArchMastery.Structurizer.Reflector/2021.514.0.42598": {
+      "ArchMastery.Reflector.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "GPS.SimpleThreading": "4.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ArchMastery.Reflector.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ArchMastery.Reflector.Core.dll": {}
+        }
+      },
+      "ArchMastery.Reflector.Structurizer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "ArchMastery.Reflector.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ArchMastery.Reflector.Structurizer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ArchMastery.Reflector.Structurizer.dll": {}
+        }
+      },
+      "GPS.SimpleThreading/4.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "compile": {
-          "bin/placeholder/ArchMastery.Structurizer.Reflector.dll": {}
+          "bin/placeholder/GPS.SimpleThreading.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ArchMastery.Structurizer.Reflector.dll": {}
+          "bin/placeholder/GPS.SimpleThreading.dll": {}
         }
       }
     }
@@ -6021,15 +6047,25 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
-    "ArchMastery.Structurizer.Reflector/2021.514.0.42598": {
+    "ArchMastery.Reflector.Core/1.0.0": {
       "type": "project",
-      "path": "../../src/ArchMastery.Structurizer.Reflector/ArchMastery.Structurizer.Reflector.csproj",
-      "msbuildProject": "../../src/ArchMastery.Structurizer.Reflector/ArchMastery.Structurizer.Reflector.csproj"
+      "path": "../../src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj",
+      "msbuildProject": "../../src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
+    },
+    "ArchMastery.Reflector.Structurizer/1.0.0": {
+      "type": "project",
+      "path": "../../src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj",
+      "msbuildProject": "../../src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj"
+    },
+    "GPS.SimpleThreading/4.0.0": {
+      "type": "project",
+      "path": "../../../../../../GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj",
+      "msbuildProject": "../../../../../GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "ArchMastery.Structurizer.Reflector >= 2021.514.0.42598",
+      "ArchMastery.Reflector.Structurizer >= 1.0.0",
       "Divergic.Logging.Xunit >= 3.6.0",
       "FluentAssertions >= 5.10.3",
       "Microsoft.NET.Test.Sdk >= 16.7.1",
@@ -6044,9 +6080,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/ArchMastery.Structurizer.Reflector.xUnit.csproj",
-      "projectName": "ArchMastery.Structurizer.Reflector.xUnit",
-      "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/ArchMastery.Structurizer.Reflector.xUnit.csproj",
+      "projectUniqueName": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/ArchMastery.Reflector.Structurizer.xUnit.csproj",
+      "projectName": "ArchMastery.Reflector.Structurizer.xUnit",
+      "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/ArchMastery.Reflector.Structurizer.xUnit.csproj",
       "packagesPath": "/home/ninja/.nuget/packages/",
       "outputPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/obj/",
       "projectStyle": "PackageReference",
@@ -6063,8 +6099,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/ArchMastery.Structurizer.Reflector.csproj": {
-              "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/ArchMastery.Structurizer.Reflector.csproj"
+            "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj": {
+              "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj"
             }
           }
         }

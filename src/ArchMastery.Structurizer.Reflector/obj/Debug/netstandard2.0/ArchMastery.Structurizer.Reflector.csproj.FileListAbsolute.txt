@@ -1,9 +1,0 @@
-/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/bin/Debug/netstandard2.0/ArchMastery.Structurizer.Reflector.deps.json
-/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/bin/Debug/netstandard2.0/ArchMastery.Structurizer.Reflector.dll
-/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/bin/Debug/netstandard2.0/ArchMastery.Structurizer.Reflector.pdb
-/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/obj/Debug/netstandard2.0/ArchMastery.Structurizer.Reflector.csprojAssemblyReference.cache
-/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/obj/Debug/netstandard2.0/ArchMastery.Structurizer.Reflector.AssemblyInfoInputs.cache
-/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/obj/Debug/netstandard2.0/ArchMastery.Structurizer.Reflector.AssemblyInfo.cs
-/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/obj/Debug/netstandard2.0/ArchMastery.Structurizer.Reflector.csproj.CoreCompileInputs.cache
-/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/obj/Debug/netstandard2.0/ArchMastery.Structurizer.Reflector.dll
-/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/obj/Debug/netstandard2.0/ArchMastery.Structurizer.Reflector.pdb

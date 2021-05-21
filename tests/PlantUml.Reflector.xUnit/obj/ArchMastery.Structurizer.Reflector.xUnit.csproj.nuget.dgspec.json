@@ -4,14 +4,118 @@
     "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/ArchMastery.Structurizer.Reflector.xUnit.csproj": {}
   },
   "projects": {
-    "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/ArchMastery.Structurizer.Reflector.csproj": {
-      "version": "2021.514.0.42598",
+    "/home/ninja/GitHub/Programs/GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj": {
+      "version": "4.0.0",
       "restore": {
-        "projectUniqueName": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/ArchMastery.Structurizer.Reflector.csproj",
-        "projectName": "ArchMastery.Structurizer.Reflector",
-        "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/ArchMastery.Structurizer.Reflector.csproj",
+        "projectUniqueName": "/home/ninja/GitHub/Programs/GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj",
+        "projectName": "GPS.SimpleThreading",
+        "projectPath": "/home/ninja/GitHub/Programs/GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj",
         "packagesPath": "/home/ninja/.nuget/packages/",
-        "outputPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/obj/",
+        "outputPath": "/home/ninja/GitHub/Programs/GPS/SimpleThreading/src/GPS.SimpleThreading/obj/",
+        "projectStyle": "PackageReference",
+        "crossTargeting": true,
+        "configFilePaths": [
+          "/home/ninja/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0",
+          "netstandard2.0",
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          },
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          },
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        },
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        },
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj",
+        "projectName": "ArchMastery.Reflector.Core",
+        "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj",
+        "packagesPath": "/home/ninja/.nuget/packages/",
+        "outputPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Core/obj/",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "configFilePaths": [
@@ -28,15 +132,143 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/ninja/GitHub/Programs/GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj": {
+                "projectPath": "/home/ninja/GitHub/Programs/GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj"
+              }
+            }
           },
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/ninja/GitHub/Programs/GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj": {
+                "projectPath": "/home/ninja/GitHub/Programs/GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj"
+              }
+            }
           },
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/ninja/GitHub/Programs/GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj": {
+                "projectPath": "/home/ninja/GitHub/Programs/GPS/SimpleThreading/src/GPS.SimpleThreading/GPS.SimpleThreading.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        },
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        },
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj",
+        "projectName": "ArchMastery.Reflector.Structurizer",
+        "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj",
+        "packagesPath": "/home/ninja/.nuget/packages/",
+        "outputPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Structurizer/obj/",
+        "projectStyle": "PackageReference",
+        "crossTargeting": true,
+        "configFilePaths": [
+          "/home/ninja/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0",
+          "netcoreapp3.1",
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj": {
+                "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
+              }
+            }
+          },
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj": {
+                "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
+              }
+            }
+          },
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {
+              "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj": {
+                "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -130,8 +362,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/ArchMastery.Structurizer.Reflector.csproj": {
-                "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Structurizer.Reflector/ArchMastery.Structurizer.Reflector.csproj"
+              "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj": {
+                "projectPath": "/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj"
               }
             }
           }

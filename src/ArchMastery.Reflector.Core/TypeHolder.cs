@@ -42,7 +42,7 @@ namespace ArchMastery.Structurizer.Reflector.Common
         {
             var result = new TClip
                          {
-                             TypeName = Generator.TypeFullName,
+                             TypeName = Generator.Slug ?? string.Empty,
                              Namespace = ObjectType.Namespace,
                              Assembly = ObjectType.Assembly
                          };

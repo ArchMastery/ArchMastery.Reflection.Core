@@ -2,8 +2,6 @@
 
     <PropertyGroup>
         <TargetFrameworks>netcoreapp3.1;netstandard2.0;net5.0</TargetFrameworks>
-        <AssemblyVersion>2021.0514.0.42598</AssemblyVersion>
-        <FileVersion>2021.0514.0.42598</FileVersion>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <Authors>The Sharp Ninja &lt;ninja@thesharp.ninja&gt;</Authors>
         <Description>Generate UML Class Diagrams with Structurizer by reflecting over Dotnet Assemblies.</Description>
@@ -15,6 +13,7 @@
         <NeutralLanguage>en</NeutralLanguage>
         <Version>$(AssemblyVersion)</Version>
         <LangVersion>9.0</LangVersion>
+        <RootNamespace>ArchMastery.Structurizer.Reflector</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
         <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
@@ -25,5 +24,11 @@
     </ItemGroup>
     <ItemGroup>
       <None Remove="obj\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Common" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\ArchMastery.Reflector.Core\ArchMastery.Reflector.Core.csproj" />
     </ItemGroup>
 </Project>

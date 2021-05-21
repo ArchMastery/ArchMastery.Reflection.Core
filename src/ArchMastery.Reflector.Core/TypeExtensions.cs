@@ -115,11 +115,18 @@ namespace ArchMastery.Structurizer.Reflector
                 typeName = $"{parentName}.{genericType.Name}";
             }
 
+            var index = typeName.IndexOf("`", StringComparison.Ordinal);
+
+            string result = typeName;
+
+            if (index > -1)
+            {
 #if !NET5_0
-            var result = $"{typeName.Substring(0, typeName.IndexOf("`", StringComparison.Ordinal))}{genericTypes}";
+                result = $"{typeName.Substring(0, index)}{genericTypes}";
 #else
-            var result = $"{typeName[..typeName.IndexOf("`", StringComparison.Ordinal)]}{genericTypes}";
+                result = $"{typeName[..index]}{genericTypes}";
 #endif
+            }
 
             return result;
 

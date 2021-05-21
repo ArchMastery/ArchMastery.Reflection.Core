@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,15 +17,21 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
 {
     public class RecipeTests : LoggingTestsBase
     {
-        private const string AssemblyPath = "./TestAssemblies/TestAssembly.dll";
+        private const string AssemblyPath1 = "./TestAssemblies/FluentAssertions.dll";
+        private const string AssemblyPath2 = "./TestAssemblies/Newtonsoft.Json.dll";
 
+        private static readonly string[] Assemblies =
+        {
+            AssemblyPath1, AssemblyPath2
+        };
 
         public RecipeTests(ITestOutputHelper output) : base(output, LogLevel.Debug)
         {
         }
 
         [Theory]
-        [InlineData(AssemblyPath, Layers.All, true)]
+        [InlineData(AssemblyPath1, Layers.All, true)]
+        [InlineData(AssemblyPath2, Layers.All, true)]
         public void WriteDocumentPerType(string assemblyPath, Layers layers, bool includeAttributes)
         {
             if (OperatingSystem.IsWindows()) assemblyPath = assemblyPath.Replace("/", "\\");
@@ -40,14 +48,51 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
             var types = assembly.GetTypes().Where(t => t.ToString() != "<PrivateImplementationDetails>");
             types = types.Where(t => t.GetCustomAttribute(typeof(CompilerGeneratedAttribute)) is null);
 
-            var result = new[] {assembly}.WriteAll(
+            var grouped = types
+                         .GroupBy(c => $"{c.NormalizeName().AsSlug()}")
+                         .Select(group =>
+                                     (Path.Combine(directoryInfo.FullName, group.Key.AsSlug() + ".puml"), group))
+                         .Select(pair => pair.group.Key)
+                         .ToList();
+
+            var result = new[] {assembly}.WriteAll<StructurizerClip, StructurizerGenerator>(
                                                    directoryInfo,
                                                    WriteStrategy.OneFilePerType,
                                                    layers,
                                                    includeAttributes);
 
             result.Should().NotBeNullOrEmpty();
-            result.Count.Should().Be(types.Count());
+
+            if (grouped.Count != result.Count)
+            {
+                Output.WriteLine($"grouped.Count: {grouped.Count}");
+                Output.WriteLine($"result.Count: {result.Count}");
+
+                grouped.ForEach(g =>
+                                {
+                                    var key = g.AsSlug();
+                                    var isNotFound = result.All(r => Path.GetFileNameWithoutExtension(r.Name) != key);
+
+                                    if (isNotFound)
+                                    {
+                                        Output.WriteLine($"{key} is not in results.");
+                                    }
+                                });
+
+                result.Select(r => Path.GetFileNameWithoutExtension(r.Name)).ToList().ForEach(r =>
+                {
+                    var key = r.AsSlug();
+                    var isNotFound = grouped.All(g => g.AsSlug() != key);
+
+                    if (isNotFound)
+                    {
+                        Output.WriteLine($"{key} is not in grouped.");
+                    }
+                });
+
+                result.Count.Should().Be(grouped.Count);
+            }
+
 
             var file = result.First();
 
@@ -57,7 +102,8 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
         }
 
         [Theory]
-        [InlineData(AssemblyPath, Layers.All, true)]
+        [InlineData(AssemblyPath1, Layers.All, true)]
+        [InlineData(AssemblyPath2, Layers.All, true)]
         public void WriteDocumentPerNamespace(string assemblyPath, Layers layers, bool includeAttributes)
         {
             if (OperatingSystem.IsWindows()) assemblyPath = assemblyPath.Replace("/", "\\");
@@ -75,7 +121,7 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
             types = types.Where(t => t.GetCustomAttribute(typeof(CompilerGeneratedAttribute)) is null);
             var namespaces = types.GroupBy(t => t.Namespace);
 
-            var result = new[] {assembly}.WriteAll(
+            var result = new[] {assembly}.WriteAll<StructurizerClip, StructurizerGenerator>(
                                                    directoryInfo,
                                                    WriteStrategy.OneFilePerNamespace,
                                                    layers,
@@ -92,7 +138,8 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
         }
 
         [Theory]
-        [InlineData(AssemblyPath, Layers.All, true)]
+        [InlineData(AssemblyPath1, Layers.All, true)]
+        [InlineData(AssemblyPath2, Layers.All, true)]
         public void WriteDocumentPerAssembly(string assemblyPath, Layers layers, bool includeAttributes)
         {
             if (OperatingSystem.IsWindows()) assemblyPath = assemblyPath.Replace("/", "\\");
@@ -106,7 +153,7 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
             if (directoryInfo.Exists && directoryInfo.GetFiles().Length > 0)
                 directoryInfo.GetFiles().Select(f => f.FullName).ToList().ForEach(File.Delete);
 
-            var result = new[] {assembly}.WriteAll(
+            var result = new[] {assembly}.WriteAll<StructurizerClip, StructurizerGenerator>(
                                                    directoryInfo,
                                                    WriteStrategy.OneFilePerAssembly,
                                                    layers,
@@ -123,7 +170,8 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
         }
 
         [Theory]
-        [InlineData(AssemblyPath, Layers.All, true)]
+        [InlineData(AssemblyPath1, Layers.All, true)]
+        [InlineData(AssemblyPath2, Layers.All, true)]
         public void WriteFilePerType(string assemblyPath, Layers layers, bool includeAttributes)
         {
             if (OperatingSystem.IsWindows()) assemblyPath = assemblyPath.Replace("/", "\\");
@@ -137,17 +185,84 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
             if (directoryInfo.Exists && directoryInfo.GetFiles().Length > 0)
                 directoryInfo.GetFiles().Select(f => f.FullName).ToList().ForEach(File.Delete);
 
-            var types = assembly.GetTypes().Where(t => t.ToString() != "<PrivateImplementationDetails>");
-            types = types.Where(t => t.GetCustomAttribute(typeof(CompilerGeneratedAttribute)) is null);
+            var types =
+                assembly
+                   .GetTypes()
+                   .Where(t => t.ToString() != "<PrivateImplementationDetails>" &&
+                               t.GetCustomAttribute(typeof(CompilerGeneratedAttribute)) is null)
+                   .ToList();
 
-            var result = new[] {assembly}.WriteAll(
+            var grouped = types
+                         .GroupBy(c => $"{c.NormalizeName().AsSlug()}")
+                         .Select(group =>
+                                     (Path.Combine(directoryInfo.FullName, group.Key.AsSlug() + ".puml"), group))
+                         .Select(pair => pair.group.Key)
+                         .ToList();
+
+
+            var result = new[] {assembly}.WriteAll<StructurizerClip, StructurizerGenerator>(
                                                    directoryInfo,
                                                    WriteStrategy.OneFilePerType,
                                                    layers,
                                                    includeAttributes);
 
             result.Should().NotBeNullOrEmpty();
-            result.Count.Should().Be(types.Count());
+
+            var slugs = types.Select(type => new { Type = type, Slug = type.NormalizeName().AsSlug()}).ToList();
+
+            List<(TypeHolder<StructurizerClip, StructurizerGenerator>, string)> duplicates = new();
+
+            try
+            {
+                duplicates.AddRange(slugs.Where(slug => slugs.Count(ss => ss.Slug.Equals(slug)) > 1)
+                                              .Select(pair =>
+                                                          (new TypeHolder<StructurizerClip, StructurizerGenerator>(pair.Type),
+                                                           pair.Slug)));
+
+                duplicates.Should().BeEmpty();
+            }
+            catch (InvalidOperationException)
+            {
+                duplicates.ForEach(name =>
+                                   {
+                                       var clip = name.Item1.Generate(Layers.TypeEnd);
+                                       Output.WriteLine(new string('-', 80));
+                                       Output.WriteLine(clip.ToString(Layers.TypeEnd));
+                                   });
+
+                duplicates.Count.Should().Be(0);
+            }
+
+
+            if (grouped.Count != result.Count)
+            {
+                Output.WriteLine($"grouped.Count: {grouped.Count}");
+                Output.WriteLine($"result.Count: {result.Count}");
+
+                grouped.ForEach(g =>
+                                {
+                                    var key = g.AsSlug();
+                                    var isNotFound = result.All(r => Path.GetFileNameWithoutExtension(r.Name) != key);
+
+                                    if (isNotFound)
+                                    {
+                                        Output.WriteLine($"{key} is not in results.");
+                                    }
+                                });
+
+                result.Select(r => Path.GetFileNameWithoutExtension(r.Name)).ToList().ForEach(r =>
+                {
+                    var key = r.AsSlug();
+                    var isNotFound = grouped.All(g => g.AsSlug() != key);
+
+                    if (isNotFound)
+                    {
+                        Output.WriteLine($"{key} is not in grouped.");
+                    }
+                });
+
+                result.Count.Should().Be(grouped.Count);
+            }
 
             var file = result.First();
 
@@ -157,7 +272,8 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
         }
 
         [Theory]
-        [InlineData(AssemblyPath, Layers.All, true)]
+        [InlineData(AssemblyPath1, Layers.All, true)]
+        [InlineData(AssemblyPath2, Layers.All, true)]
         public void WriteFilePerNamespace(string assemblyPath, Layers layers, bool includeAttributes)
         {
             if (OperatingSystem.IsWindows()) assemblyPath = assemblyPath.Replace("/", "\\");
@@ -175,7 +291,7 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
             types = types.Where(t => t.GetCustomAttribute(typeof(CompilerGeneratedAttribute)) is null);
             var namespaces = types.GroupBy(t => t.Namespace);
 
-            var result = new[] {assembly}.WriteAll(
+            var result = new[] {assembly}.WriteAll<StructurizerClip, StructurizerGenerator>(
                                                    directoryInfo,
                                                    WriteStrategy.OneFilePerNamespace,
                                                    layers,
@@ -192,28 +308,37 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
         }
 
         [Theory]
-        [InlineData(AssemblyPath, Layers.All, true)]
-        public void WriteFilePerAssembly(string assemblyPath, Layers layers, bool includeAttributes)
+        [InlineData(Layers.All, true)]
+        public void WriteFilePerAssembly(Layers layers, bool includeAttributes)
         {
-            if (OperatingSystem.IsWindows()) assemblyPath = assemblyPath.Replace("/", "\\");
-            var path = Path.Combine(Environment.CurrentDirectory, assemblyPath);
-            var assembly = Assembly.LoadFile(path);
+            var assemblyPaths = Assemblies;
+            if (OperatingSystem.IsWindows()) assemblyPaths = assemblyPaths.Select(a => a.Replace("/", "\\")).ToArray();
+            var paths = assemblyPaths.Select(a => Path.Combine(Environment.CurrentDirectory, a)).ToList();
+            var assemblies = new List<Assembly>();
+            DirectoryInfo? directoryInfo = null;
+            paths.ForEach(path =>
+                          {
+                              var assembly = Assembly.LoadFile(path);
 
-            assembly.Should().NotBeNull();
+                              assembly.Should().NotBeNull();
 
-            var directoryInfo = new DirectoryInfo($"{Path.GetFileNameWithoutExtension(path)}\\PerAssembly");
+                              assemblies.Add(assembly);
 
-            if (directoryInfo.Exists && directoryInfo.GetFiles().Length > 0)
-                directoryInfo.GetFiles().Select(f => f.FullName).ToList().ForEach(File.Delete);
+                              directoryInfo ??=
+                                  new DirectoryInfo($"{Path.GetFileNameWithoutExtension(path)}\\PerAssembly");
 
-            var result = new[] {assembly}.WriteAll(
+                              if (directoryInfo.Exists && directoryInfo.GetFiles().Length > 0)
+                                  directoryInfo.GetFiles().Select(f => f.FullName).ToList().ForEach(File.Delete);
+                          });
+
+            var result = assemblies.WriteAll<StructurizerClip, StructurizerGenerator>(
                                                    directoryInfo,
                                                    WriteStrategy.OneFilePerAssembly,
                                                    layers,
                                                    includeAttributes);
 
             result.Should().NotBeNullOrEmpty();
-            result.Count.Should().Be(1);
+            result.Count.Should().Be(Assemblies.Length);
 
             var file = result.First();
 
@@ -223,7 +348,8 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
         }
 
         [Theory]
-        [InlineData(AssemblyPath, Layers.All, true)]
+        [InlineData(AssemblyPath1, Layers.All, true)]
+        [InlineData(AssemblyPath2, Layers.All, true)]
         public void AllInAssembly(string assemblyPath, Layers layers, bool includeAttributes)
         {
             var path = Path.Combine(Environment.CurrentDirectory, assemblyPath);
@@ -231,74 +357,70 @@ namespace ArchMastery.Structurizer.Reflector.xUnit
 
             assembly.Should().NotBeNull();
 
-            var results = assembly.BuildAll(layers, includeAttributes).ToList();
+            var results = assembly.BuildAll<StructurizerClip, StructurizerGenerator>(layers, includeAttributes).ToList();
 
             results.Should().NotBeNullOrEmpty();
 
             var types = assembly.GetTypes().Where(t => t.ToString() != "<PrivateImplementationDetails>").ToList();
             types = types.Where(t => t.GetCustomAttribute(typeof(CompilerGeneratedAttribute)) is null).ToList();
 
-            var resultCount = results.GroupBy(i => i.clip.Namespace + "." + i.clip.TypeName).Count();
+            var grouped = types
+                         .GroupBy(c => $"{c.NormalizeName().AsSlug()}")
+                         .ToList();
 
-            Output.WriteLine($"types: {types.Count}");
-            Output.WriteLine($"results.Count: {resultCount}");
+            var result = results.GroupBy(i => i.clip.Namespace + "." + i.clip.TypeName).ToList();
 
-            resultCount.Should().Be(types.Count);
+            if (grouped.Count != result.Count)
+            {
+                Output.WriteLine($"grouped.Count: {grouped.Count}");
+                Output.WriteLine($"result.Count: {result.Count}");
+
+                grouped.ForEach(g =>
+                                {
+                                    var key = g.Key;
+                                    var isNotFound = result.All(r => Path.GetFileNameWithoutExtension(r.Key) != key);
+
+                                    if (isNotFound)
+                                    {
+                                        Output.WriteLine($"{key} is not in results.");
+                                    }
+                                });
+
+                result.Select(r => Path.GetFileNameWithoutExtension(r.Key)).ToList().ForEach(r =>
+                {
+                    var key = r.AsSlug();
+                    var isNotFound = grouped.All(g => g.Key != key);
+
+                    if (isNotFound)
+                    {
+                        Output.WriteLine($"{key} is not in grouped.");
+                    }
+                });
+
+                result.Count.Should().Be(grouped.Count);
+            }
 
             results.GroupBy(r => r.layers).Count().Should().Be(2);
 
-            var counter = 0;
+            var groupedTypes = grouped.Where(g => g.Count() > 1).ToList();
 
-            foreach (var type in types)
+            if (groupedTypes.Count > 0)
             {
-                var typeMap =
-                    (type.IsClass && !type.IsAbstract,
-                     type.IsClass && type.IsAbstract,
-                     type.IsEnum, type.IsArray, type.IsInterface,
-                     type.IsValueType);
-
-                var objectType = typeMap switch
-                                 {
-                                     (true, _, _, _, _, _) => "class ",
-                                     (_, true, _, _, _, _) => "abstract class ",
-                                     (_, _, true, _, _, _) => "enum ",
-                                     (_, _, _, _, true, _) => "interface ",
-                                     _ => "entity "
-                                 };
-
-                var name = objectType + type.NormalizeName().AsSlug() + " ";
-
-                try
+                foreach (var grouping in groupedTypes)
                 {
-                    var (clip, _) = results.SingleOrDefault(pair => pair.clip.ToString(pair.layers)
-                                                                        .Contains(name));
-
-                    clip.Should()
-                        .NotBeNull($"name: {name} not found in any clip.\n`{type} : {type.BaseType.NormalizeName()}`");
-
-                    ++counter;
+                    foreach (var type in grouping)
+                    {
+                        var typeHolder = new TypeHolder<StructurizerClip, StructurizerGenerator>(type);
+                        Output.WriteLine(typeHolder.Generate(Layers.TypeEnd).ToString(Layers.TypeEnd));
+                    }
                 }
-                catch (InvalidOperationException ex) when (ex.Message ==
-                                                           "Sequence contains more than one matching element")
-                {
-                    var set = results.Where(pair => pair.clip.ToString(pair.layers).Contains(name)).ToList();
 
-                    set.ForEach(pair =>
-                                {
-                                    var (clip, layer) = pair;
-                                    Output.WriteLine(new string('-', 80));
-                                    Output.WriteLine(clip.ToString(layer));
-                                });
-
-                    set.Count.Should().Be(1, $"`{name}` exists multiple times.");
-                }
+                groupedTypes.Count.Should().Be(0);
             }
 
-            counter.Should().Be(types.Count);
-
-            Output.WriteLine("@startuml");
+            // Output.WriteLine("@startuml");
             results.ToList().ForEach(r => Output.WriteLine(r.clip.ToString(r.layers)));
-            Output.WriteLine("@enduml");
+            // Output.WriteLine("@enduml");
         }
     }
 }

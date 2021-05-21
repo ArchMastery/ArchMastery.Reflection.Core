@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "ArchMastery.Structurizer.Reflector.xUnit/1.0.0": {
         "dependencies": {
-          "ArchMastery.Structurizer.Reflector": "2021.514.0.42598",
+          "ArchMastery.Structurizer.Reflector": "1.0.0",
           "Divergic.Logging.Xunit": "3.6.0",
           "FluentAssertions": "5.10.3",
           "Microsoft.NET.Test.Sdk": "16.7.1",
@@ -1203,9 +1203,25 @@
         }
       },
       "xunit.runner.visualstudio/2.4.3": {},
-      "ArchMastery.Structurizer.Reflector/2021.514.0.42598": {
+      "ArchMastery.Core/1.0.0": {
+        "dependencies": {
+          "GPS.SimpleThreading": "4.0.0"
+        },
+        "runtime": {
+          "ArchMastery.Core.dll": {}
+        }
+      },
+      "ArchMastery.Structurizer.Reflector/1.0.0": {
+        "dependencies": {
+          "ArchMastery.Core": "1.0.0"
+        },
         "runtime": {
           "ArchMastery.Structurizer.Reflector.dll": {}
+        }
+      },
+      "GPS.SimpleThreading/4.0.0": {
+        "runtime": {
+          "GPS.SimpleThreading.dll": {}
         }
       }
     }
@@ -1930,7 +1946,17 @@
       "path": "xunit.runner.visualstudio/2.4.3",
       "hashPath": "xunit.runner.visualstudio.2.4.3.nupkg.sha512"
     },
-    "ArchMastery.Structurizer.Reflector/2021.514.0.42598": {
+    "ArchMastery.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ArchMastery.Structurizer.Reflector/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GPS.SimpleThreading/4.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

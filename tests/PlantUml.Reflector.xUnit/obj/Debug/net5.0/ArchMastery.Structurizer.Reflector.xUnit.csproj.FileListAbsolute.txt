@@ -1,4 +1,3 @@
-/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/bin/Debug/net5.0/TestAssemblies/TestAssembly.dll
 /home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/bin/Debug/net5.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll
 /home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/bin/Debug/net5.0/xunit.runner.reporters.netcoreapp10.dll
 /home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/bin/Debug/net5.0/xunit.runner.utility.netcoreapp10.dll
@@ -111,3 +110,9 @@
 /home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/obj/Debug/net5.0/ref/ArchMastery.Structurizer.Reflector.xUnit.dll
 /home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/obj/Debug/net5.0/ArchMastery.Structurizer.Reflector.xUnit.pdb
 /home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/obj/Debug/net5.0/ArchMastery.Structurizer.Reflector.xUnit.genruntimeconfig.cache
+/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/bin/Debug/net5.0/TestAssemblies/FluentAssertions.dll
+/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/bin/Debug/net5.0/TestAssemblies/Newtonsoft.Json.dll
+/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/bin/Debug/net5.0/ArchMastery.Core.dll
+/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/bin/Debug/net5.0/ArchMastery.Core.pdb
+/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/bin/Debug/net5.0/GPS.SimpleThreading.dll
+/home/ninja/GitHub/Programs/GitHub/sharpninja/ArchMastery.Structurizer.Reflector/tests/PlantUml.Reflector.xUnit/bin/Debug/net5.0/GPS.SimpleThreading.pdb

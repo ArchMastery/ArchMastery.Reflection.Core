@@ -1,10 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchMastery.Strcturizer.Reflector", "src\ArchMastery.Structurizer.Reflector\ArchMastery.Structurizer.Reflector.csproj", "{B07F7141-7FD3-41EA-95B8-7E68E308E705}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchMastery.Reflector.Structurizer", "src\ArchMastery.Reflector.Structurizer\ArchMastery.Reflector.Structurizer.csproj", "{B07F7141-7FD3-41EA-95B8-7E68E308E705}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{82A4E004-3B89-4A1E-B0A3-4775D3D3CF66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchMastery.Strcturizer.Reflector.xUnit", "tests\PlantUml.Reflector.xUnit\ArchMastery.Structurizer.Reflector.xUnit.csproj", "{AE7B2867-E681-4E5E-BA09-F3816F4B7147}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchMastery.Reflector.Structurizer.xUnit", "tests\PlantUml.Reflector.xUnit\ArchMastery.Reflector.Structurizer.xUnit.csproj", "{AE7B2867-E681-4E5E-BA09-F3816F4B7147}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchMastery.Reflector.Core", "src\ArchMastery.Reflector.Core\ArchMastery.Reflector.Core.csproj", "{F7CE5627-6D1C-4D71-AF56-8BB795196D17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPS.SimpleThreading", "..\..\..\..\GPS\SimpleThreading\src\GPS.SimpleThreading\GPS.SimpleThreading.csproj", "{12642A0C-81A8-4DD0-8ED6-462994E307B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +24,14 @@ Global
 		{AE7B2867-E681-4E5E-BA09-F3816F4B7147}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE7B2867-E681-4E5E-BA09-F3816F4B7147}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE7B2867-E681-4E5E-BA09-F3816F4B7147}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7CE5627-6D1C-4D71-AF56-8BB795196D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7CE5627-6D1C-4D71-AF56-8BB795196D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7CE5627-6D1C-4D71-AF56-8BB795196D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7CE5627-6D1C-4D71-AF56-8BB795196D17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12642A0C-81A8-4DD0-8ED6-462994E307B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12642A0C-81A8-4DD0-8ED6-462994E307B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12642A0C-81A8-4DD0-8ED6-462994E307B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12642A0C-81A8-4DD0-8ED6-462994E307B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AE7B2867-E681-4E5E-BA09-F3816F4B7147} = {82A4E004-3B89-4A1E-B0A3-4775D3D3CF66}
