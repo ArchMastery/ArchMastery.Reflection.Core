@@ -32,8 +32,8 @@ jobs:
         dotnet build --no-restore
         dotnet test --no-build --verbosity normal
 
-  GitHub:
-    if: ${{ github.ref != 'refs/heads/main' }}
+  Nuget:
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: [Common]
     runs-on: ubuntu-latest
     steps:
@@ -41,19 +41,17 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
-        NO_BUILD: true
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: false
     - name: Publish ArchMastery.Reflector.Structurizer to Nuget
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
-        NO_BUILD: true
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: false
 
-  Nuget:
-    if: ${{ github.ref == 'refs/heads/main' }}
+  GitHub:
+    if: ${{ github.ref != 'refs/heads/main' }}
     needs: [Common]
     runs-on: ubuntu-latest
     steps:
