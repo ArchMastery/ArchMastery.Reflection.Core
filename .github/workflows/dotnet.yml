@@ -2,13 +2,11 @@ name: .NET
 
 on: 
   push:
-    branches-ignore: [master]
-  release: 
-    types: [published]
 
 jobs:
   Common:
     env:
+      master: 'refs/heads/master'
       nugetFolder: .
       repository: https://nuget.pkg.github.com/ArchMastery/v3/index.json
     runs-on: ubuntu-latest
@@ -44,34 +42,24 @@ jobs:
         ls -al *nupkg
 
     - name: Publish to Production Nuget Feed
-      if: ${{ github.ref == 'refs/heads/main' }}
+      if: ${{ github.ref == env.master  }}
       continue-on-error: false
       run: |
         nuget push ${{ env.nugetFolder }}/*nupkg -ApiKey ${{ secrets.NUGET }}
-
-
-#     - name: Publish ArchMastery.Reflector.Core to NUGET
-#       if: ${{ github.ref == 'refs/heads/main' }}
-#       continue-on-error: false
-#       uses: brandedoutcast/publish-nuget@v2.5.5
-#       with:
-#         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
-#         NUGET_KEY: ${{ secrets.NUGET }}
-#         INCLUDE_SYMBOLS: false
-#     - name: Publish ArchMastery.Reflector.Structurizer to Nuget
-#       if: ${{ github.ref == 'refs/heads/main' }}
-#       continue-on-error: false
-#       uses: brandedoutcast/publish-nuget@v2.5.5
-#       with:
-#         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
-#         NUGET_KEY: ${{ secrets.NUGET }}
-#         INCLUDE_SYMBOLS: false
+    
+    - name: Github Release create, update, and upload assets
+      # You may pin to the exact commit or the version.
+      # uses: meeDamian/github-release@7ae19492500104f636b3fee4d8103af0fed36c8e
+      uses: meeDamian/github-release@v2.0.3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ env.GitVersion_FullSemVer }}
+        name: ${{ 'v' + env.GitVersion_FullSemVer }}
+        files: ${{ env.nugetFolder + "/*npkg" }}
 
     # Non-Release Deploy to GitHub
-    - if: ${{ github.ref != 'refs/heads/main' }}
-      run: dotnet nuget push ${{ env.nugetFolder }}/*.nupkg --source ${{ env.repository }} -k ${{ github.token }}
 #     - name: Publish to GitHub Nuget Feed
-#       if: ${{ github.ref != 'refs/heads/main' }}
+#       if: ${{ github.ref != env.master }}
 #       continue-on-error: false
 #       run: |
 #         nuget sources Add -Name GitHub -Source ${{ env.repository }}
