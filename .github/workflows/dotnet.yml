@@ -48,6 +48,7 @@ jobs:
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: false
     - name: Publish ArchMastery.Reflector.Structurizer to Nuget
+      if: ${{ github.ref == 'refs/heads/main' }}
       continue-on-error: false
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
@@ -60,5 +61,7 @@ jobs:
       if: ${{ github.ref != 'refs/heads/main' }}
       continue-on-error: false
       run: |
-        nuget sources Add -Name GitHub -username sharpninja -password ${{ secrets.GITHUB }} -Source https://nuget.pkg.github.com/ArchMastery/v3/index.json
-        nuget push ./*nupkg -Source GitHub
+        nuget sources Add -Name GitHub -Source https://nuget.pkg.github.com/ArchMastery/v3/index.json
+        nuget setapikey ${{ secrets.GITHUB }} -Source GitHub
+        nuget push ./*nupkg -Source GitHub -ApiKey ${{ secrets.GITHUB }}
+        
