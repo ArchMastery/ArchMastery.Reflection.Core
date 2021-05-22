@@ -38,15 +38,23 @@ jobs:
         dotnet restore
         dotnet build --no-restore
         dotnet test --no-build --verbosity normal
-        dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
+        # dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
 
-    - name: Publish to Production Nuget Feed
+#     - name: Publish to Production Nuget Feed
+#       if: ${{ github.ref == env.master  }}
+#       continue-on-error: false
+#       run: |
+#         # ls -al ${{ env.nugetFolder }}/*nupkg
+#         # nuget push ${{ env.nugetFolder }}/*nupkg ${{ secrets.NUGET }} -src "https://api.nuget.org/v3/index.json"
+
+    - name: Publish NuGet
       if: ${{ github.ref == env.master  }}
-      continue-on-error: false
-      run: |
-        ls -al ${{ env.nugetFolder }}/*nupkg
-        nuget push ${{ env.nugetFolder }}/*nupkg ${{ secrets.NUGET }} -src "https://api.nuget.org/v3/index.json"
-
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: ./src/**/*.csproj
+        TAG_COMMIT: true
+        NUGET_KEY: ${{ secrets.NUGET }}
+        INCLUDE_SYMBOLS: false
 
 #     - name: Publish ArchMastery.Reflector.Core to NUGET
 #       if: ${{ github.ref == 'refs/heads/main' }}
