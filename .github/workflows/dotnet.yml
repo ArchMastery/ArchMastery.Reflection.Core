@@ -1,14 +1,14 @@
 name: .NET
 
 on: 
+  push:
+    branches-ignore: [master]
   release: 
     types: [published]
 
 jobs:
-  build:
-
+  Common:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
       with:
@@ -27,11 +27,16 @@ jobs:
     - name: Run GitVersion
       run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
     - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: |
+        dotnet restore
+        dotnet build --no-restore
+        dotnet test --no-build --verbosity normal
+
+  GitHub:
+    if: ${{ github.ref != 'refs/heads/main' }}
+    needs: [Common]
+    runs-on: ubuntu-latest
+    steps:
     - name: Publish ArchMastery.Reflector.Core to NUGET
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
@@ -46,6 +51,12 @@ jobs:
         NO_BUILD: true
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: false
+
+  Nuget:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [Common]
+    runs-on: ubuntu-latest
+    steps:
     - name: Publish to GitHub Nuget Feed
       run: |
         nuget sources Add -Name GitHub -Source https://nuget.pkg.github.com/ArchMastery/v3/index.json -username sharpninja -password ${{ secrets.GITHUB }}
