@@ -34,10 +34,12 @@ jobs:
         dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o .
 
     - name: GitHub Upload Release Artifacts
+      if: ${{ github.ref != 'refs/heads/main' }}
       uses: Roang-zero1/github-upload-release-artifacts-action@v2.1.0
       with:
         args: ./*nupkg
       env:
+        name: ${{ github.ref }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   Nuget:
@@ -61,11 +63,6 @@ jobs:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: false
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.2.3
-      with:
-        path: ./*nupkg
-        retention-days: 1
 
   GitHub:
     if: ${{ github.ref != 'refs/heads/main' }}
@@ -75,6 +72,7 @@ jobs:
     - name: Download a Build Artifact
       uses: actions/download-artifact@v2.0.9
       with:
+        name: ${{ github.ref }}
         path: .
     - name: Publish to GitHub Nuget Feed
       run: |
