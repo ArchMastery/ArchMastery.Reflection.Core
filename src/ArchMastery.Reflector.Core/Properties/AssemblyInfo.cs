@@ -4,5 +4,5 @@
 
 [assembly: AssemblyVersion("1.1.0.0")]
 [assembly: AssemblyFileVersion("1.1.0.0")]
-[assembly: AssemblyInformationalVersion("1.1.0+91.Branch.master.Sha.50ee77113c71ef5206cc6589fd1cc0ce2d38c4b9")]
+[assembly: AssemblyInformationalVersion("1.1.0+93.Branch.master.Sha.a0dbf9829d3f74eb1c3e5ab7aa33a19723ec94ad")]
 
