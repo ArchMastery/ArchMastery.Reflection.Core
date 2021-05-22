@@ -2,7 +2,7 @@
 
 
 
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
-[assembly: AssemblyInformationalVersion("1.1.0+93.Branch.master.Sha.a0dbf9829d3f74eb1c3e5ab7aa33a19723ec94ad")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
+[assembly: AssemblyInformationalVersion("1.2.0+95.Branch.master.Sha.94decbc8656c012056c6286c85f49bb83f8d7153")]
 
