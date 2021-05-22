@@ -19,7 +19,7 @@ jobs:
       continue-on-error: false
       run: |
         git fetch --tags
-        git branch --create-reflog master origin/master
+        # git branch --create-reflog master origin/master
 
     - name: Setup .NET
       continue-on-error: false
