@@ -37,7 +37,7 @@ jobs:
         dotnet restore
         dotnet build --no-restore
         dotnet test --no-build --verbosity normal
-        dotnet pack --version ${{ env.GitVersion_FullSemVer }} --no-build --verbosity normal --include-symbols --include-source  -o .
+        dotnet pack --version ${{ env.GitVersion_FullSemVer }} --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
 
     - name: Publish ArchMastery.Reflector.Core to NUGET
       if: ${{ github.ref == 'refs/heads/main' }}
@@ -57,11 +57,13 @@ jobs:
         INCLUDE_SYMBOLS: false
 
     # Non-Release Deploy to GitHub
+    - if: ${{ github.ref != 'refs/heads/main' }}
+      run: dotnet nuget push ${{ env.nugetFolder }}/*.nupkg --source ${{ env.repository }} -k ${{ github.token }}
     - name: Publish to GitHub Nuget Feed
       if: ${{ github.ref != 'refs/heads/main' }}
       continue-on-error: false
       run: |
         nuget sources Add -Name GitHub -Source https://nuget.pkg.github.com/ArchMastery/v3/index.json
         nuget setapikey ${{ secrets.GITHUB }} -Source GitHub
-        nuget push ./*nupkg -Source GitHub -ApiKey ${{ secrets.GITHUB }}
+        nuget push ${{ env.nugetFolder }}/*nupkg -Source GitHub -ApiKey ${{ secrets.GITHUB }}
         
