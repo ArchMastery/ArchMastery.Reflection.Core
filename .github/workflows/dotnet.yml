@@ -26,12 +26,17 @@ jobs:
       run: dotnet tool install --global GitVersion.Tool
     - name: Run GitVersion
       run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
-    - name: Restore dependencies
+    - name: Push tag
+      uses: anothrNick/github-tag-action@1.26.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CUSTOM_TAG: ${{ env.GitVersion_FullSemVer }}
+    - name: Dotnet
       run: |
         dotnet restore
         dotnet build --no-restore
         dotnet test --no-build --verbosity normal
-        dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o .
+        dotnet pack --version ${{ env.GitVersion_FullSemVer }} --no-build --verbosity normal --include-symbols --include-source  -o .
 
     - name: GitHub Upload Release Artifacts
       if: ${{ github.ref != 'refs/heads/main' }}
