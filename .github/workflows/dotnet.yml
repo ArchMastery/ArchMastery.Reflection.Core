@@ -48,7 +48,7 @@ jobs:
         INCLUDE_SYMBOLS: false
     - name: Publish to GitHub Nuget Feed
       run: |
-        nuget sources Add -Name GitHub -Source https://nuget.pkg.github.com/ArchMastery/v3/index.json
+        nuget sources Add -Name GitHub -Source https://nuget.pkg.github.com/ArchMastery/v3/index.json -username sharpninja -password ${{ secrets.GITHUB }}
         nuget setapikey ${{ secrets.GITHUB_TOKEN }} -Source GitHub
         nuget push ./ArchMastery.Reflector.Core*nupkg -Source GitHub
         nuget push ./ArchMastery.Reflector.Structurizer*nupkg -Source GitHub
