@@ -49,12 +49,12 @@ jobs:
 
     - name: Publish NuGet
       if: ${{ github.ref == env.master  }}
-      uses: brandedoutcast/publish-nuget@v2.5.5
+      uses: Rebel028/publish-nuget@2.6.1
       with:
-        PROJECT_FILE_PATH: ./src/**/*.csproj
+        PROJECT_FILE_PATH: "./ArchMastery.Sctrurizer.Reflector.sln"
         TAG_COMMIT: true
         NUGET_KEY: ${{ secrets.NUGET }}
-        INCLUDE_SYMBOLS: false
+        INCLUDE_SYMBOLS: true
 
 #     - name: Publish ArchMastery.Reflector.Core to NUGET
 #       if: ${{ github.ref == 'refs/heads/main' }}
