@@ -11,76 +11,54 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      continue-on-error: false
       with:
         fetch-depth: 0
-    - name: Initialize GitVersion
+    - name: Initialize Git
+      continue-on-error: false
       run: |
         git fetch --tags
         git branch --create-reflog master origin/master
 
     - name: Setup .NET
+      continue-on-error: false
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
     - name: Install GitVersion
+      continue-on-error: false
       run: dotnet tool install --global GitVersion.Tool
     - name: Run GitVersion
+      continue-on-error: false
       run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
-    - name: Push tag
-      uses: anothrNick/github-tag-action@1.26.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        CUSTOM_TAG: ${{ env.GitVersion_FullSemVer }}
     - name: Dotnet
+      continue-on-error: false
       run: |
         dotnet restore
         dotnet build --no-restore
         dotnet test --no-build --verbosity normal
         dotnet pack --version ${{ env.GitVersion_FullSemVer }} --no-build --verbosity normal --include-symbols --include-source  -o .
 
-    - name: GitHub Upload Release Artifacts
-      if: ${{ github.ref != 'refs/heads/main' }}
-      uses: Roang-zero1/github-upload-release-artifacts-action@v2.1.0
-      with:
-        args: ./*nupkg
-      env:
-        name: ${{ github.ref }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  Nuget:
-    if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [Common]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v2.0.9
-      with:
-        path: .
     - name: Publish ArchMastery.Reflector.Core to NUGET
+      if: ${{ github.ref == 'refs/heads/main' }}
+      continue-on-error: false
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: false
     - name: Publish ArchMastery.Reflector.Structurizer to Nuget
+      continue-on-error: false
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: false
 
-  GitHub:
-    if: ${{ github.ref != 'refs/heads/main' }}
-    needs: [Common]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v2.0.9
-      with:
-        name: ${{ github.ref }}
-        path: .
+    # Non-Release Deploy to GitHub
     - name: Publish to GitHub Nuget Feed
+      if: ${{ github.ref != 'refs/heads/main' }}
+      continue-on-error: false
       run: |
         nuget sources Add -Name GitHub -username sharpninja -password ${{ secrets.GITHUB }} -Source https://nuget.pkg.github.com/ArchMastery/v3/index.json
-        nuget push ./ArchMastery.Reflector.Core*nupkg -Source GitHub
-        nuget push ./ArchMastery.Reflector.Structurizer*nupkg -Source GitHub
+        nuget push ./*nupkg -Source GitHub
