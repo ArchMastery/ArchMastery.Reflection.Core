@@ -45,7 +45,7 @@ jobs:
       if: ${{ github.ref == env.master  }}
       continue-on-error: false
       run: |
-        nuget push ${{ env.nugetFolder }}/*nupkg -ApiKey ${{ secrets.NUGET }}
+        nuget push ${{ env.nugetFolder }}/*nupkg -ApiKey ${{ secrets.NUGET }} -SkipDuplicate -Source https://api.nuget.org/v3/index.json 
     
     - name: Github Release create, update, and upload assets
       # You may pin to the exact commit or the version.
