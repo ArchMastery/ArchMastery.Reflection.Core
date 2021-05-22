@@ -41,13 +41,13 @@ jobs:
 #         dotnet test --no-build --verbosity normal
 #         # dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
 
-    - name: Git Commit on Workflow
-      # You may pin to the exact commit or the version.
-      # uses: matheusalbino/git-commit@ec22539edac987513eb1787b652fb3375a200807
-      uses: sharpninja/git-commit@master
-      with:
-        # Github Token
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+#     - name: Git Commit on Workflow
+#       # You may pin to the exact commit or the version.
+#       # uses: matheusalbino/git-commit@ec22539edac987513eb1787b652fb3375a200807
+#       uses: sharpninja/git-commit@master
+#       with:
+#         # Github Token
+#         github-token: ${{ secrets.GITHUB_TOKEN }}
         
 #     - name: Publish to Production Nuget Feed
 #       if: ${{ github.ref == env.master  }}
