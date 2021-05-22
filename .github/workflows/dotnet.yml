@@ -54,8 +54,8 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         tag: ${{ env.GitVersion_FullSemVer }}
-        name: ${{ 'v' + env.GitVersion_FullSemVer }}
-        files: ${{ env.nugetFolder + "/*npkg" }}
+        name: "v${{  env.GitVersion_FullSemVer }}"
+        files: "${{ env.nugetFolder }}/*npkg"
 
     # Non-Release Deploy to GitHub
 #     - name: Publish to GitHub Nuget Feed
