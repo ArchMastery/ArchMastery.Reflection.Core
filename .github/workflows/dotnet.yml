@@ -10,6 +10,7 @@ jobs:
   Common:
     env:
       nugetFolder: .
+      repository: https://nuget.pkg.github.com/ArchMastery/v3/index.json
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -61,11 +62,11 @@ jobs:
     # Non-Release Deploy to GitHub
     - if: ${{ github.ref != 'refs/heads/main' }}
       run: dotnet nuget push ${{ env.nugetFolder }}/*.nupkg --source ${{ env.repository }} -k ${{ github.token }}
-    - name: Publish to GitHub Nuget Feed
-      if: ${{ github.ref != 'refs/heads/main' }}
-      continue-on-error: false
-      run: |
-        nuget sources Add -Name GitHub -Source https://nuget.pkg.github.com/ArchMastery/v3/index.json
-        nuget setapikey ${{ secrets.GITHUB }} -Source GitHub
-        nuget push ${{ env.nugetFolder }}/*nupkg -Source GitHub -ApiKey ${{ secrets.GITHUB }}
+#     - name: Publish to GitHub Nuget Feed
+#       if: ${{ github.ref != 'refs/heads/main' }}
+#       continue-on-error: false
+#       run: |
+#         nuget sources Add -Name GitHub -Source ${{ env.repository }}
+#         nuget setapikey ${{ secrets.GITHUB }} -Source GitHub
+#         nuget push ${{ env.nugetFolder }}/*nupkg -Source GitHub -ApiKey ${{ secrets.GITHUB }}
         
