@@ -52,8 +52,9 @@ jobs:
       uses: Rebel028/publish-nuget@2.6.1
       with:
         PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
-        TAG_COMMIT: true
+        NUGET_SOURCE: "nuget.org"
         NUGET_KEY: ${{ secrets.NUGET }}
+        TAG_COMMIT: true
         INCLUDE_SYMBOLS: true
 
     - name: Publish Structurizer to NuGet
@@ -61,6 +62,7 @@ jobs:
       uses: Rebel028/publish-nuget@2.6.1
       with: 
         PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj"
+        NUGET_SOURCE: "nuget.org"
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: true
 
