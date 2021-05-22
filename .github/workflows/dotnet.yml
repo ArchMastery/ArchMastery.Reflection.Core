@@ -8,7 +8,8 @@ jobs:
     env:
       master: 'refs/heads/master'
       nugetFolder: .
-      repository: https://nuget.pkg.github.com/ArchMastery/v3/index.json
+      github_repository: "https://nuget.pkg.github.com/ArchMastery"
+      nuget_repository: "https://nuget.org"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -52,7 +53,7 @@ jobs:
       uses: Rebel028/publish-nuget@2.6.1
       with:
         PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
-        NUGET_SOURCE: "nuget.org"
+        NUGET_SOURCE: ${{ env.nuget_repository }}
         NUGET_KEY: ${{ secrets.NUGET }}
         TAG_COMMIT: true
         INCLUDE_SYMBOLS: true
@@ -62,7 +63,7 @@ jobs:
       uses: Rebel028/publish-nuget@2.6.1
       with: 
         PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj"
-        NUGET_SOURCE: "nuget.org"
+        NUGET_SOURCE: ${{ env.nuget_repository }}
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: true
 
