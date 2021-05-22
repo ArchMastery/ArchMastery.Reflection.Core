@@ -63,7 +63,7 @@ jobs:
         PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
         NUGET_SOURCE: ${{ env.nuget_repository }}
         NUGET_KEY: ${{ secrets.NUGET }}
-        CUSTOM_VERSION: ${{ env.GitVersion_SemVer }}
+        VERSION_STATIC: ${{ env.GitVersion_SemVer }}
         TAG_COMMIT: true
         INCLUDE_SYMBOLS: true
 
@@ -74,7 +74,7 @@ jobs:
         PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj"
         NUGET_SOURCE: ${{ env.nuget_repository }}
         NUGET_KEY: ${{ secrets.NUGET }}
-        CUSTOM_VERSION: ${{ env.GitVersion_SemVer }}
+        VERSION_STATIC: ${{ env.GitVersion_SemVer }}
         INCLUDE_SYMBOLS: true
 
 #     - name: Publish ArchMastery.Reflector.Core to NUGET
