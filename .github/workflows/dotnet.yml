@@ -2,13 +2,11 @@ name: .NET
 
 on: 
   push:
-    branches-ignore: [master]
-  release: 
-    types: [published]
 
 jobs:
   Common:
     env:
+      master: 'refs/heads/master'
       nugetFolder: .
       repository: https://nuget.pkg.github.com/ArchMastery/v3/index.json
     runs-on: ubuntu-latest
@@ -21,7 +19,7 @@ jobs:
       continue-on-error: false
       run: |
         git fetch --tags
-        git branch --create-reflog master origin/master
+        # git branch --create-reflog master origin/master
 
     - name: Setup .NET
       continue-on-error: false
@@ -43,7 +41,7 @@ jobs:
         dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
 
     - name: Publish to Production Nuget Feed
-      if: ${{ github.ref == 'refs/heads/main' }}
+      if: ${{ github.ref == env.master  }}
       continue-on-error: false
       run: |
         ls -al ${{ env.nugetFolder }}/*nupkg
@@ -68,10 +66,8 @@ jobs:
 #         INCLUDE_SYMBOLS: false
 
     # Non-Release Deploy to GitHub
-    - if: ${{ github.ref != 'refs/heads/main' }}
-      run: dotnet nuget push ${{ env.nugetFolder }}/*.nupkg --source ${{ env.repository }} -k ${{ github.token }}
 #     - name: Publish to GitHub Nuget Feed
-#       if: ${{ github.ref != 'refs/heads/main' }}
+#       if: ${{ github.ref != env.master }}
 #       continue-on-error: false
 #       run: |
 #         nuget sources Add -Name GitHub -Source ${{ env.repository }}
