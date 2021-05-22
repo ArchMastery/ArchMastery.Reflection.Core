@@ -47,7 +47,7 @@ jobs:
       if: ${{ github.ref == 'refs/heads/main' }}
       continue-on-error: false
       run: |
-        nuget push ${{ env.nugetFolder }}/*nupkg -ApiKey ${{ secrets.NUGET }}
+        nuget push ${{ env.nugetFolder }}/*nupkg -ApiKey ${{ secrets.NUGET }} -SkipDuplicate -Source https://api.nuget.org/v3/index.json 
 
 
 #     - name: Publish ArchMastery.Reflector.Core to NUGET
