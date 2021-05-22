@@ -33,13 +33,13 @@ jobs:
     - name: Run GitVersion
       continue-on-error: false
       run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
-    - name: Dotnet
-      continue-on-error: false
-      run: |
-        dotnet restore
-        dotnet build --no-restore
-        dotnet test --no-build --verbosity normal
-        # dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
+#     - name: Dotnet
+#       continue-on-error: false
+#       run: |
+#         dotnet restore
+#         dotnet build --no-restore
+#         dotnet test --no-build --verbosity normal
+#         # dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
 
     - name: Git Commit on Workflow
       # You may pin to the exact commit or the version.
@@ -58,7 +58,7 @@ jobs:
 
     - name: Publish Core to NuGet
       if: ${{ github.ref == env.master  }}
-      uses: Rebel028/publish-nuget@2.6.1
+      uses: sharpninja/publish-nuget@master
       with:
         PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
         NUGET_SOURCE: ${{ env.nuget_repository }}
@@ -69,7 +69,7 @@ jobs:
 
     - name: Publish Structurizer to NuGet
       if: ${{ github.ref == env.master  }}
-      uses: Rebel028/publish-nuget@2.6.1
+      uses: sharpninja/publish-nuget@master
       with: 
         PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj"
         NUGET_SOURCE: ${{ env.nuget_repository }}
