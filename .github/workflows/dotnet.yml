@@ -1,54 +1,80 @@
 name: .NET
 
 on: 
+  push:
+    branches-ignore: [master]
   release: 
     types: [published]
 
 jobs:
-  build:
-
+  Common:
+    env:
+      nugetFolder: .
+      repository: https://nuget.pkg.github.com/ArchMastery/v3/index.json
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
+      continue-on-error: false
       with:
         fetch-depth: 0
-    - name: Initialize GitVersion
+    - name: Initialize Git
+      continue-on-error: false
       run: |
         git fetch --tags
         git branch --create-reflog master origin/master
 
     - name: Setup .NET
+      continue-on-error: false
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
     - name: Install GitVersion
+      continue-on-error: false
       run: dotnet tool install --global GitVersion.Tool
     - name: Run GitVersion
+      continue-on-error: false
       run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-    - name: Publish ArchMastery.Reflector.Core to NUGET
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
-        NO_BUILD: true
-        NUGET_KEY: ${{ secrets.NUGET }}
-        INCLUDE_SYMBOLS: false
-    - name: Publish ArchMastery.Reflector.Structurizer to Nuget
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
-        NO_BUILD: true
-        NUGET_KEY: ${{ secrets.NUGET }}
-        INCLUDE_SYMBOLS: false
-    - name: Publish to GitHub Nuget Feed
+    - name: Dotnet
+      continue-on-error: false
       run: |
-        nuget sources Add -Name GitHub -Source https://nuget.pkg.github.com/ArchMastery/v3/index.json -username sharpninja -password ${{ secrets.GITHUB }}
-        nuget setapikey ${{ secrets.GITHUB_TOKEN }} -Source GitHub
-        nuget push ./ArchMastery.Reflector.Core*nupkg -Source GitHub
-        nuget push ./ArchMastery.Reflector.Structurizer*nupkg -Source GitHub
+        dotnet restore
+        dotnet build --no-restore
+        dotnet test --no-build --verbosity normal
+        dotnet pack --version ${{ env.GitVersion_FullSemVer }} --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
+        ls -al *nupkg
+
+    - name: Publish to Production Nuget Feed
+      if: ${{ github.ref == 'refs/heads/main' }}
+      continue-on-error: false
+      run: |
+        nuget push ${{ env.nugetFolder }}/*nupkg -ApiKey ${{ secrets.NUGET }}
+
+
+#     - name: Publish ArchMastery.Reflector.Core to NUGET
+#       if: ${{ github.ref == 'refs/heads/main' }}
+#       continue-on-error: false
+#       uses: brandedoutcast/publish-nuget@v2.5.5
+#       with:
+#         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
+#         NUGET_KEY: ${{ secrets.NUGET }}
+#         INCLUDE_SYMBOLS: false
+#     - name: Publish ArchMastery.Reflector.Structurizer to Nuget
+#       if: ${{ github.ref == 'refs/heads/main' }}
+#       continue-on-error: false
+#       uses: brandedoutcast/publish-nuget@v2.5.5
+#       with:
+#         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
+#         NUGET_KEY: ${{ secrets.NUGET }}
+#         INCLUDE_SYMBOLS: false
+
+    # Non-Release Deploy to GitHub
+    - if: ${{ github.ref != 'refs/heads/main' }}
+      run: dotnet nuget push ${{ env.nugetFolder }}/*.nupkg --source ${{ env.repository }} -k ${{ github.token }}
+#     - name: Publish to GitHub Nuget Feed
+#       if: ${{ github.ref != 'refs/heads/main' }}
+#       continue-on-error: false
+#       run: |
+#         nuget sources Add -Name GitHub -Source ${{ env.repository }}
+#         nuget setapikey ${{ secrets.GITHUB }} -Source GitHub
+#         nuget push ${{ env.nugetFolder }}/*nupkg -Source GitHub -ApiKey ${{ secrets.GITHUB }}
+        
