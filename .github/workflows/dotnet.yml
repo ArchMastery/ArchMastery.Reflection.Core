@@ -45,7 +45,7 @@ jobs:
       continue-on-error: false
       run: |
         ls -al ${{ env.nugetFolder }}/*nupkg
-        nuget push ${{ env.nugetFolder }}/*nupkg ${{ secrets.NUGET }} -src https://api.nuget.org/v3/index.json 
+        nuget push ${{ env.nugetFolder }}/*nupkg ${{ secrets.NUGET }} -src "https://api.nuget.org/v3/index.json"
 
 
 #     - name: Publish ArchMastery.Reflector.Core to NUGET
