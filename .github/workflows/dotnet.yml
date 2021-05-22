@@ -41,13 +41,13 @@ jobs:
         dotnet build --no-restore
         dotnet test --no-build --verbosity normal
         dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
-        ls -al *nupkg
 
     - name: Publish to Production Nuget Feed
       if: ${{ github.ref == 'refs/heads/main' }}
       continue-on-error: false
       run: |
-        nuget push ${{ env.nugetFolder }}/*nupkg -ApiKey ${{ secrets.NUGET }} -SkipDuplicate -Source https://api.nuget.org/v3/index.json 
+        ls -al ${{ env.nugetFolder }}/*nupkg
+        nuget push ${{ env.nugetFolder }}/*nupkg ${{ secrets.NUGET }} -SkipDuplicate -Source https://api.nuget.org/v3/index.json 
 
 
 #     - name: Publish ArchMastery.Reflector.Core to NUGET
