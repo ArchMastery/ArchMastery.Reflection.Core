@@ -29,16 +29,16 @@ jobs:
     - name: Install GitVersion
       continue-on-error: false
       run: dotnet tool install --global GitVersion.Tool
-    - name: Run GitVersion
-      continue-on-error: false
-      run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
+    #- name: Run GitVersion
+    #  continue-on-error: false
+    #  run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
     - name: Dotnet
       continue-on-error: false
       run: |
         dotnet restore
         dotnet build --no-restore
         dotnet test --no-build --verbosity normal
-        dotnet pack --version ${{ env.GitVersion_FullSemVer }} --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
+        dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
         ls -al *nupkg
 
     - name: Publish to Production Nuget Feed

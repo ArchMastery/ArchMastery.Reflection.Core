@@ -5,3 +5,5 @@ bin/
 *.user
 *.dotsettings
 *.suo
+*.nupkg
+/.vs/ArchMastery.Sctrurizer.Reflector/DesignTimeBuild
