@@ -41,23 +41,31 @@ jobs:
         dotnet build --no-restore
         dotnet test --no-build --verbosity normal
         dotnet pack --version ${{ env.GitVersion_FullSemVer }} --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
+        ls -al *nupkg
 
-    - name: Publish ArchMastery.Reflector.Core to NUGET
+    - name: Publish to Production Nuget Feed
       if: ${{ github.ref == 'refs/heads/main' }}
       continue-on-error: false
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
-        NUGET_KEY: ${{ secrets.NUGET }}
-        INCLUDE_SYMBOLS: false
-    - name: Publish ArchMastery.Reflector.Structurizer to Nuget
-      if: ${{ github.ref == 'refs/heads/main' }}
-      continue-on-error: false
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
-        NUGET_KEY: ${{ secrets.NUGET }}
-        INCLUDE_SYMBOLS: false
+      run: |
+        nuget push ${{ env.nugetFolder }}/*nupkg -ApiKey ${{ secrets.NUGET }}
+
+
+#     - name: Publish ArchMastery.Reflector.Core to NUGET
+#       if: ${{ github.ref == 'refs/heads/main' }}
+#       continue-on-error: false
+#       uses: brandedoutcast/publish-nuget@v2.5.5
+#       with:
+#         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj
+#         NUGET_KEY: ${{ secrets.NUGET }}
+#         INCLUDE_SYMBOLS: false
+#     - name: Publish ArchMastery.Reflector.Structurizer to Nuget
+#       if: ${{ github.ref == 'refs/heads/main' }}
+#       continue-on-error: false
+#       uses: brandedoutcast/publish-nuget@v2.5.5
+#       with:
+#         PROJECT_FILE_PATH: src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj
+#         NUGET_KEY: ${{ secrets.NUGET }}
+#         INCLUDE_SYMBOLS: false
 
     # Non-Release Deploy to GitHub
     - if: ${{ github.ref != 'refs/heads/main' }}
