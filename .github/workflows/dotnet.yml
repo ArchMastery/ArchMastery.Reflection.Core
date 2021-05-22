@@ -40,7 +40,7 @@ jobs:
         dotnet restore
         dotnet build --no-restore
         dotnet test --no-build --verbosity normal
-        dotnet pack --version ${{ env.GitVersion_FullSemVer }} --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
+        dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
         ls -al *nupkg
 
     - name: Publish to Production Nuget Feed
