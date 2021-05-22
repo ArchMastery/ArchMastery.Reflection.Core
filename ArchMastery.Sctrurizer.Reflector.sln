@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C61213DA-6285-4484-94C9-AC72EED2CBBF}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		GitVersion.yml = GitVersion.yml
 	EndProjectSection
 EndProject
 Global
