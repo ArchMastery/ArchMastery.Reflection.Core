@@ -9,7 +9,7 @@ jobs:
       master: 'refs/heads/master'
       nugetFolder: .
       github_repository: "https://nuget.pkg.github.com/ArchMastery"
-      nuget_repository: "https://nuget.org"
+      nuget_repository: "https://api.nuget.org"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -30,9 +30,9 @@ jobs:
     - name: Install GitVersion
       continue-on-error: false
       run: dotnet tool install --global GitVersion.Tool
-    #- name: Run GitVersion
-    #  continue-on-error: false
-    #  run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
+    - name: Run GitVersion
+      continue-on-error: false
+      run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
     - name: Dotnet
       continue-on-error: false
       run: |
@@ -55,6 +55,7 @@ jobs:
         PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
         NUGET_SOURCE: ${{ env.nuget_repository }}
         NUGET_KEY: ${{ secrets.NUGET }}
+        CUSTOM_VERSION: ${{ env.GitVersion_SemVer }}
         TAG_COMMIT: true
         INCLUDE_SYMBOLS: true
 
@@ -65,6 +66,7 @@ jobs:
         PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj"
         NUGET_SOURCE: ${{ env.nuget_repository }}
         NUGET_KEY: ${{ secrets.NUGET }}
+        CUSTOM_VERSION: ${{ env.GitVersion_SemVer }}
         INCLUDE_SYMBOLS: true
 
 #     - name: Publish ArchMastery.Reflector.Core to NUGET
