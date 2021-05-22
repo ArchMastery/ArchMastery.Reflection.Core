@@ -47,12 +47,20 @@ jobs:
 #         # ls -al ${{ env.nugetFolder }}/*nupkg
 #         # nuget push ${{ env.nugetFolder }}/*nupkg ${{ secrets.NUGET }} -src "https://api.nuget.org/v3/index.json"
 
-    - name: Publish NuGet
+    - name: Publish Core to NuGet
       if: ${{ github.ref == env.master  }}
       uses: Rebel028/publish-nuget@2.6.1
       with:
-        PROJECT_FILE_PATH: "./ArchMastery.Sctrurizer.Reflector.sln"
+        PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
         TAG_COMMIT: true
+        NUGET_KEY: ${{ secrets.NUGET }}
+        INCLUDE_SYMBOLS: true
+
+    - name: Publish Structurizer to NuGet
+      if: ${{ github.ref == env.master  }}
+      uses: Rebel028/publish-nuget@2.6.1
+      with: 
+        PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj"
         NUGET_KEY: ${{ secrets.NUGET }}
         INCLUDE_SYMBOLS: true
 
