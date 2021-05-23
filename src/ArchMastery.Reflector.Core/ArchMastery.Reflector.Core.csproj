@@ -1,27 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;netstandard2.0;net5.0</TargetFrameworks>
-    <LangVersion>9.0</LangVersion>
-    <Title>Architecture Master Core</Title>
-    <Copyright>(c) 2021 - The Sharp Ninja</Copyright>
-    <PackageProjectUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>Structurizer UML C4Diagram</PackageTags>
-    <RootNamespace>ArchMastery.Reflector.Core</RootNamespace>
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <PackageLicenseUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core/blob/master/LICENSE.md</PackageLicenseUrl>
-    <Version>$(AssemblyInformationalVersion)</Version>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>netcoreapp3.1;netstandard2.0;net5.0</TargetFrameworks>
+        <LangVersion>9.0</LangVersion>
+        <Title>Architecture Master Core</Title>
+        <Authors>The Sharp Ninja &gt;ninja@thesharp.ninja$lt;</Authors>
+        <Copyright>(c) 2021 - The Sharp Ninja</Copyright>
+        <PackageProjectUrl>https://github.com/ArchMastery</PackageProjectUrl>
+        <Description>Core library for ArchMastery.</Description>
+        <RepositoryUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>Structurizer;UML;C4Diagram</PackageTags>
+        <NeutralLanguage>en</NeutralLanguage>
+        <RootNamespace>ArchMastery.Reflector.Core</RootNamespace>
+        <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+        <PackageLicenseUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core/blob/master/LICENSE.md</PackageLicenseUrl>
+        <Version>$(AssemblyInformationalVersion)</Version>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="GitVersion.MsBuild" Version="5.6.9">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="GPS.SimpleThreading" Version="3.0.1" />
-  </ItemGroup>
-  
+    <ItemGroup>
+        <PackageReference Include="GitVersion.MsBuild" Version="5.6.9">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="GPS.SimpleThreading" Version="3.0.1" />
+    </ItemGroup>
+
 
 </Project>
