@@ -56,6 +56,9 @@ jobs:
 #         # ls -al ${{ env.nugetFolder }}/*nupkg
 #         # nuget push ${{ env.nugetFolder }}/*nupkg ${{ secrets.NUGET }} -src "https://api.nuget.org/v3/index.json"
 
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.0.5
+      
     - name: Publish Core to NuGet
       if: ${{ github.ref == env.master  }}
       uses: sharpninja/publish-nuget@master
