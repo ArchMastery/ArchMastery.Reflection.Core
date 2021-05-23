@@ -12,6 +12,10 @@ jobs:
       nuget_repository: "https://api.nuget.org"
     runs-on: ubuntu-latest
     steps:
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.0.5
+      with:
+        nuget-version: latest
     - uses: actions/checkout@v2
       continue-on-error: false
       with:
@@ -33,13 +37,14 @@ jobs:
     - name: Run GitVersion
       continue-on-error: false
       run: dotnet-gitversion /output buildserver /nocache /updateAssemblyInfo true
-#     - name: Dotnet
-#       continue-on-error: false
-#       run: |
-#         dotnet restore
-#         dotnet build --no-restore
-#         dotnet test --no-build --verbosity normal
-#         # dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
+    - name: Dotnet
+      continue-on-error: false
+      run: |
+        nuget -version
+#        dotnet restore
+#        dotnet build --no-restore
+#        dotnet test --no-build --verbosity normal
+#        # dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
 
 #     - name: Git Commit on Workflow
 #       # You may pin to the exact commit or the version.
@@ -56,8 +61,6 @@ jobs:
 #         # ls -al ${{ env.nugetFolder }}/*nupkg
 #         # nuget push ${{ env.nugetFolder }}/*nupkg ${{ secrets.NUGET }} -src "https://api.nuget.org/v3/index.json"
 
-    - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.5
       
     - name: Publish Core to NuGet
       if: ${{ github.ref == env.master  }}
