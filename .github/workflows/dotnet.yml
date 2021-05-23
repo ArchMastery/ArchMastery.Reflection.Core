@@ -40,7 +40,7 @@ jobs:
     - name: Dotnet
       continue-on-error: false
       run: |
-        nuget -version
+        nuget
 #        dotnet restore
 #        dotnet build --no-restore
 #        dotnet test --no-build --verbosity normal
