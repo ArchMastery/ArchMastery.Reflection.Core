@@ -9,7 +9,7 @@ jobs:
       master: 'refs/heads/master'
       nugetFolder: .
       github_repository: "https://nuget.pkg.github.com/ArchMastery"
-      nuget_repository: "https://api.nuget.org/v3/index.json"
+      nuget_repository: "https://api.nuget.org"
     runs-on: ubuntu-latest
     steps:
     - name: Setup NuGet.exe for use with actions
