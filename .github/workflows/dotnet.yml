@@ -7,7 +7,7 @@ jobs:
   Common:
     env:
       master: 'refs/heads/master'
-      nugetFolder: .
+      outputFolder: "./artifacts"
       github_repository: "https://nuget.pkg.github.com/ArchMastery"
       nuget_repository: "https://api.nuget.org"
     runs-on: ubuntu-latest
@@ -40,11 +40,9 @@ jobs:
     - name: Dotnet
       continue-on-error: false
       run: |
-        nuget
-#        dotnet restore
-#        dotnet build --no-restore
-#        dotnet test --no-build --verbosity normal
-#        # dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.nugetFolder }}
+        dotnet restore
+        dotnet test --no-restore --verbosity normal
+        dotnet pack --no-build --verbosity normal --include-symbols --include-source  -o ${{ env.outputFolder }}
 
 #     - name: Git Commit on Workflow
 #       # You may pin to the exact commit or the version.
@@ -66,21 +64,12 @@ jobs:
       if: ${{ github.ref == env.master  }}
       uses: sharpninja/publish-nuget@master
       with:
-        PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Core/ArchMastery.Reflector.Core.csproj"
+        OUTPUT_FOLDER: ${{ env.outputFolder }}
+        NO_BUILD: true
         NUGET_SOURCE: ${{ env.nuget_repository }}
         NUGET_KEY: ${{ secrets.NUGET }}
         VERSION_STATIC: ${{ env.GitVersion_SemVer }}
         TAG_COMMIT: true
-        INCLUDE_SYMBOLS: true
-
-    - name: Publish Structurizer to NuGet
-      if: ${{ github.ref == env.master  }}
-      uses: sharpninja/publish-nuget@master
-      with: 
-        PROJECT_FILE_PATH: "./src/ArchMastery.Reflector.Structurizer/ArchMastery.Reflector.Structurizer.csproj"
-        NUGET_SOURCE: ${{ env.nuget_repository }}
-        NUGET_KEY: ${{ secrets.NUGET }}
-        VERSION_STATIC: ${{ env.GitVersion_SemVer }}
         INCLUDE_SYMBOLS: true
 
 #     - name: Publish ArchMastery.Reflector.Core to NUGET
