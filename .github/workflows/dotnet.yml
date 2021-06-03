@@ -90,11 +90,12 @@ jobs:
 #         INCLUDE_SYMBOLS: false
 
     # Non-Release Deploy to GitHub
-#     - name: Publish to GitHub Nuget Feed
-#       if: ${{ github.ref != env.master }}
-#       continue-on-error: false
-#       run: |
-#         nuget sources Add -Name GitHub -Source ${{ env.repository }}
-#         nuget setapikey ${{ secrets.GITHUB }} -Source GitHub
-#         nuget push ${{ env.nugetFolder }}/*nupkg -Source GitHub -ApiKey ${{ secrets.GITHUB }}
+    - name: Publish to GitHub Nuget Feed
+      if: ${{ github.ref != env.master }}
+      continue-on-error: false
+      run: |
+        # nuget sources Add -Name GitHub -Source ${{ env.repository }}
+        # nuget setapikey ${{ secrets.GITHUB }} -Source GitHub
+        # nuget push ${{ env.nugetFolder }}/*nupkg -Source ${{ env.repository }} -ApiKey ${{ secrets.GITHUB }}
+        dotnet nuget push ${{ env.nugetFolder }}/*.nupkg --source ${{ env.repository }} -k ${{ github.token }}
         
