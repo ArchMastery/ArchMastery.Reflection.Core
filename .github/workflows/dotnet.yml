@@ -67,7 +67,7 @@ jobs:
         OUTPUT_FOLDER: ${{ env.outputFolder }}
         NO_BUILD: true
         NUGET_SOURCE: ${{ env.nuget_repository }}
-        NUGET_KEY: ${{ secrets.NUGET }}
+        NUGET_KEY: ${{ secrets.NUGET_TOKEN }}
         VERSION_STATIC: ${{ env.GitVersion_SemVer }}
         TAG_COMMIT: true
         INCLUDE_SYMBOLS: true
