@@ -19,6 +19,7 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
+        <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net6.0'" />
         <Compile Remove="Common\**" />
         <Compile Remove="obj\**" />
     </ItemGroup>
@@ -34,7 +35,7 @@
         <ProjectReference Include="..\ArchMastery.Reflector.Core\ArchMastery.Reflector.Core.csproj" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="GitVersion.MsBuild" Version="[5.6.9,6)">
+        <PackageReference Include="GitVersion.MsBuild" Version="[5.8.1,)">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
