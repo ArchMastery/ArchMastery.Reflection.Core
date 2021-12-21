@@ -1,0 +1,37 @@
+<Project>
+    <PropertyGroup>
+        <Authors>The Sharp Ninja $lt;ninja@thesharp.ninja$gt;</Authors>
+        <Copyright>(c) 2021 - The Sharp Ninja</Copyright>
+        <PackageProjectUrl>https://github.com/ArchMastery</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>Structurizer;UML;C4Diagram</PackageTags>
+        <NeutralLanguage>en</NeutralLanguage>
+        <LangVersion>10.0</LangVersion>
+        <EnableNETAnalyzers>True</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+        
+        <PackagesFolder>$(MSBuildProjectDirectory)\..\..\Packages</PackagesFolder>
+
+        <IncludeSymbols Condition="'$(Configuration)' == 'Debug' ">true</IncludeSymbols>
+        <IncludeSource Condition="'$(Configuration)' == 'Debug' ">true</IncludeSource>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+    <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent"
+            Condition="$(MSBuildProjectFile.Contains('xUnit')) == false">
+        <Copy DestinationFolder="$(PackagesFolder)" SourceFiles="**\Debug\*.symbols.nupkg" Condition="'$(Configuration)' == 'Debug' " />
+        <Copy DestinationFolder="$(PackagesFolder)" SourceFiles="**\Release\*.nupkg" Condition="'$(Configuration)' == 'Release' " />
+    </Target>-->
+
+</Project>

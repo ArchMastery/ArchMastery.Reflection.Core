@@ -1,17 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-
-    <IsPackable>false</IsPackable>
-
     <AssemblyVersion>2021.0514.0.42598</AssemblyVersion>
-
     <FileVersion>2021.0514.0.42598</FileVersion>
-
     <Nullable>enable</Nullable>
-
     <RootNamespace>ArchMastery.Structurizer.Reflector.xUnit</RootNamespace>
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

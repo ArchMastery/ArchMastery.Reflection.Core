@@ -1,43 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFrameworks>netcoreapp3.1;netstandard2.0;net5.0;net6.0</TargetFrameworks>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Authors>The Sharp Ninja &gt;ninja@thesharp.ninja$lt;</Authors>
-        <Copyright>(c) 2021 - The Sharp Ninja</Copyright>
-        <Description>Generates Structurizer code by reflecting over Dotnet Assemblies.</Description>
-        <PackageProjectUrl>https://github.com/ArchMastery</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/ArchMastery/ArchMastery.Reflection.Core</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-        <PackageTags>Structurizer;UML;C4Diagram</PackageTags>
-        <NeutralLanguage>en</NeutralLanguage>
-        <Version>$(AssemblyVersion)</Version>
-        <LangVersion>10.0</LangVersion>
-        <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-        <RootNamespace>ArchMastery.Reflector.Structurizer</RootNamespace>
-        <Version>$(AssemblyInformationalVersion)</Version>
-    </PropertyGroup>
-    <ItemGroup>
-        <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
-        <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net6.0'" />
-        <Compile Remove="Common\**" />
-        <Compile Remove="obj\**" />
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Remove="Common\**" />
-        <EmbeddedResource Remove="obj\**" />
-    </ItemGroup>
-    <ItemGroup>
-        <None Remove="Common\**" />
-        <None Remove="obj\**" />
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\ArchMastery.Reflector.Core\ArchMastery.Reflector.Core.csproj" />
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="GitVersion.MsBuild" Version="[5.8.1,)">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netcoreapp3.1;netstandard2.0;net5.0;net6.0</TargetFrameworks>
+
+		<Title>Architecture Mastery Restructurizer Output</Title>
+		<Description>Generates Structurizer code by reflecting over Dotnet Assemblies.</Description>
+
+		<RootNamespace>ArchMastery.Reflector.Structurizer</RootNamespace>
+
+		<GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
+		<Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net6.0'" />
+		<Compile Remove="Common\**" />
+		<Compile Remove="obj\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Remove="Common\**" />
+		<EmbeddedResource Remove="obj\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="Common\**" />
+		<None Remove="obj\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ArchMastery.Reflector.Core\ArchMastery.Reflector.Core.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="GitVersion.MsBuild" Version="[5.8.1,)">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 </Project>

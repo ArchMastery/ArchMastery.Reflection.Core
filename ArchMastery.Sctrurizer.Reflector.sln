@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31306.274
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31903.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchMastery.Reflector.Structurizer", "src\ArchMastery.Reflector.Structurizer\ArchMastery.Reflector.Structurizer.csproj", "{B07F7141-7FD3-41EA-95B8-7E68E308E705}"
 EndProject
@@ -13,8 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchMastery.Reflector.Core"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C61213DA-6285-4484-94C9-AC72EED2CBBF}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		GitVersion.yml = GitVersion.yml
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
