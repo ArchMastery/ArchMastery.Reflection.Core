@@ -1,18 +1,14 @@
 name: .NET
 
 on:
-  push:
-    branches: [ release/* ]
-    tags: 
-      - v*
-  pull_request:
-    branches: [ main, master ]
+  release:
   workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: windows-latest
+    env:
+      event_name: ${{ github.event_name }}
 
     steps:
     - name: Checkout
@@ -26,13 +22,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-        include-prerelease: true
         
-    - name: Setup Scoop
+    - name: Setup Gitversion
       run: |
-        iwr -useb get.scoop.sh | iex
-        scoop install gitversion
-        GitVersion
+        "`${env:event_name}: [${env:event_name}]"
+        dotnet tool install -g gitversion.yool
+        dotnet-gitversion
         
     - name: Restore dependencies
       run: dotnet restore
