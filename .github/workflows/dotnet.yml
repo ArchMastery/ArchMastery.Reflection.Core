@@ -47,11 +47,10 @@ jobs:
     - name: Publish
       if: ${{ github.event_name == 'release' }}
       run: | 
-        $outPath = (Join-Path . -Child packages)
-        dotnet pack -c Release --no-restore --include-source --no-build -o $outPath 
+        $packages - gci *.symbols.nupkg -Directory src\** -ErrorAction Stop
+
+        $packages.FullName
         
-        gci $outPath\*.symbols.nupkg -ErrorAction Stop
-        
-        gci $outPath\*.symbols.nupkg | forEach-Object -process {
+        $packages.FullName | forEach-Object -process {
           dotnet nuget push $_ -k "${{ secrets.NUGET_KEY }}" -s https://api.nuget.org/v3/index.json --skip-duplicate
         }

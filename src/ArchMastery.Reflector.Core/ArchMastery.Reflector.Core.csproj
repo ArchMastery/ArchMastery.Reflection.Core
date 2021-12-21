@@ -22,8 +22,4 @@
 		<PackageReference Include="GPS.SimpleThreading" Version="[3.0.1,4)" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Properties\" />
-	</ItemGroup>
-
 </Project>
