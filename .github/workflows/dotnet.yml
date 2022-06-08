@@ -23,12 +23,10 @@ jobs:
       with:
         dotnet-version: 6.0.x
         
-    - name: Setup Gitversion
-      run: |
-        "`${env:event_name}: [${env:event_name}]"
-        # dotnet tool install -g gitversion.tool
-        # dotnet-gitversion
-        gitversion
+    - name: GitHub Action to Setup GitVersion
+      uses: StanleyGoldman/setup-gitversion@v1.0.1
+      with:
+        run-gitversion: true
         
     - name: Restore dependencies
       run: dotnet restore
