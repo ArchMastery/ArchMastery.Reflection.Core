@@ -59,6 +59,7 @@ jobs:
         dotnet test -c ${env:configuration} --no-build
         dotnet pack -c ${env:configuration} --no-build --include-symbols --include-source
         $packages = gci *.symbols.nupkg -Recurse -ErrorAction Stop
+        New-Item ./artifacts -ItemType Directory
         $packages | move-item -Destination ./artifacts/
         
     - name: Upload a Build Artifact
