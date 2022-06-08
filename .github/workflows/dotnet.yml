@@ -9,7 +9,7 @@ env:
   if_true: 'Release'
   if_false: 'Debug'
   event_name: ${{ github.event_name }}
-  configuration: ${{ global.condval.outputs.value }}
+  configuration: ${{ condval.outputs.value }}
 
 jobs:
   build:
