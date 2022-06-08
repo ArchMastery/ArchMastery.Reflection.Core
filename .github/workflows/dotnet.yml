@@ -50,5 +50,5 @@ jobs:
         $packages.FullName
         
         $packages.FullName | forEach-Object -process {
-          dotnet nuget push $_ -k "${{ secrets.NUGET_KEY }}" -s https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push $_ -k "${{ secrets.NUGET_TOKEN }}" -s "https://api.nuget.org/v3/index.json" --skip-duplicate
         }
