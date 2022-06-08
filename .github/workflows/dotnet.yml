@@ -41,7 +41,7 @@ jobs:
       run: dotnet test -c ${env:configuration} --no-build
     - name: Publish
       shell: pwsh
-      if: ${{ env.configuration == 'release' }}
+      if: ${{ env.configuration == 'Release' }}
       run: | 
         dotnet pack -c Release --no-build --include-symbols --include-source
         $packages = gci *.symbols.nupkg -Recurse -ErrorAction Stop
