@@ -8,8 +8,10 @@ name: DevSkim
 on:
   push:
     branches: [ master ]
+    paths-ignore: [ .github/workflows ]
   pull_request:
     branches: [ master ]
+    paths-ignore: [ .github/workflows ]
   schedule:
     - cron: '30 13 * * 4'
 
