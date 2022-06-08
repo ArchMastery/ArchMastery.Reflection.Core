@@ -24,7 +24,7 @@ jobs:
         dotnet-version: 6.0.x
         
     - name: GitHub Action to Setup GitVersion
-      uses: StanleyGoldman/setup-gitversion@v1.0.1
+      uses: sharpninja/setup-gitversion@master
       with:
         run-gitversion: true
         gitversion-version: 5.10.3
