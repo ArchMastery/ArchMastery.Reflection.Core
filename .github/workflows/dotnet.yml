@@ -42,6 +42,7 @@ jobs:
       if: ${{ github.event_name != 'release' }}
       run: dotnet test --no-build
     - name: Publish
+      shell: pwsh
       if: ${{ github.event_name == 'release' }}
       run: | 
         $packages - gci *.symbols.nupkg -Directory src\** -ErrorAction Stop
