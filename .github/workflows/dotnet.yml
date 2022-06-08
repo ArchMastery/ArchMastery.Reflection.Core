@@ -57,6 +57,15 @@ jobs:
       run: |
         dotnet build -c ${env:configuration} --no-restore 
         dotnet test -c ${env:configuration} --no-build
+        dotnet pack -c ${env:configuration} --no-build --include-symbols --include-source
+        $packages = gci *.symbols.nupkg -Recurse -ErrorAction Stop
+        move-item $packages ./artifacts
+        
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        path: ./artifacts
+        retention-days: 7
         
     - name: Publish
       env:
@@ -64,8 +73,7 @@ jobs:
       shell: pwsh
       if: ${{ steps.configuration.outputs.value == 'Release' }}
       run: | 
-        dotnet pack -c Release --no-build --include-symbols --include-source
-        $packages = gci *.symbols.nupkg -Recurse -ErrorAction Stop
+        $packages = gci *.symbols.nupkg -Path ./artifacts
 
         echo "Length: ${packages.Length}"
         
