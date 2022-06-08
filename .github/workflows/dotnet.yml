@@ -7,16 +7,21 @@ on:
 jobs:
   build:
     env:
-      cond: ${{ github.event_name == 'release' }}
-      if_true: 'Release'
-      if_false: 'Debug'
       event_name: ${{ github.event_name }}
-      configuration: ${{ jobs.condval.outputs.value }}
 
     runs-on: ubuntu-latest
 
     steps:
+    - uses: haya14busa/action-cond@v1
+      id: configuration
+      with:
+        cond: ${{ github.event_name == 'release' }}
+        if_true: 'Release'
+        if_false: 'Debug'
+
     - shell: pwsh
+      env:
+        configuration: ${{ steps.configuration.outputs.value }}
       run: |
         Write-Host "`${env:event_name}: [${env:event_name}]"
         Write-Host "`${env:configuration}: [${env:configuration}]"
@@ -41,16 +46,23 @@ jobs:
         run-gitversion-args: '{ "cwd": "${{ github.workspace }}" }'
         
     - name: Restore dependencies
+      env:
+        configuration: ${{ steps.configuration.outputs.value }}
       run: dotnet restore
+
     - name: Build
+      env:
+        configuration: ${{ steps.configuration.outputs.value }}
       shell: pwsh
-      run: dotnet build -c ${env:configuration} --no-restore 
-    - name: Tests
-      shell: pwsh
-      run: dotnet test -c ${env:configuration} --no-build
+      run: |
+        dotnet build -c ${env:configuration} --no-restore 
+        dotnet test -c ${env:configuration} --no-build
+        
     - name: Publish
+      env:
+        configuration: ${{ steps.configuration.outputs.value }}
       shell: pwsh
-      if: ${{ env.configuration == 'Release' }}
+      if: ${{ steps.configuration.outputs.value == 'Release' }}
       run: | 
         dotnet pack -c Release --no-build --include-symbols --include-source
         $packages = gci *.symbols.nupkg -Recurse -ErrorAction Stop
