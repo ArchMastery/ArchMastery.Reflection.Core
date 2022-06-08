@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       event_name: ${{ github.event_name }}
+      configuration: ${{ if(github.event_name == 'release') { 'Release' } else { 'Debug' } }}
 
     steps:
     - name: Checkout
@@ -32,18 +33,15 @@ jobs:
         
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build Debug
-      if: ${{ github.event_name != 'release' }}
-      run: dotnet build -c Debug --no-restore 
-    - name: Build Release
-      if: ${{ github.event_name == 'release' }}
-      run: dotnet build -c Release --no-restore 
+    - name: Build
+      shell: pwsh
+      run: dotnet build -c ${env:configuration} --no-restore 
     - name: Tests
-      if: ${{ github.event_name != 'release' }}
-      run: dotnet test --no-build
+      shell: pwsh
+      run: dotnet test -c ${env:configuration} --no-build
     - name: Publish
       shell: pwsh
-      if: ${{ github.event_name == 'release' }}
+      if: ${{ env.configuration == 'release' }}
       run: | 
         dotnet pack -c Release --no-build --include-symbols --include-source
         $packages = gci *.symbols.nupkg -Recurse -ErrorAction Stop
@@ -54,5 +52,7 @@ jobs:
           $path = $_.FullName;
           echo "FullName: [$path]"
           echo "dotnet nuget push $path -k `"${{ secrets.NUGET_TOKEN }}`" -s `"https://api.nuget.org/v3/index.json`" --skip-duplicate"
-          dotnet nuget push $path -k "${{ secrets.NUGET_TOKEN }}" -s "https://api.nuget.org/v3/index.json" --skip-duplicate
+          $result = dotnet nuget push $path -k "${{ secrets.NUGET_TOKEN }}" -s "https://api.nuget.org/v3/index.json" --skip-duplicate
+          if($LASTEXITCODE -ne 0) { throw $result }
+          echo $result
         }
