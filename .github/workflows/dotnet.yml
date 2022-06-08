@@ -45,12 +45,13 @@ jobs:
       shell: pwsh
       if: ${{ github.event_name == 'release' }}
       run: | 
-        $packages = gci *.symbols.nupkg -Directory src\** -ErrorAction Stop
+        $packages = gci *.symbols.nupkg -Directory src\** -Recurse -ErrorAction Stop
 
-        $packages.FullName
+        echo "Length: ${packages.Length}"
         
-        $packages.FullName | forEach-Object -process {
-          $path = $_;
+        $packages | forEach-Object -process {
+          $path = $_.FullName;
+          echo "FullName: [$path]"
           echo "dotnet nuget push $path -k `"${{ secrets.NUGET_TOKEN }}`" -s `"https://api.nuget.org/v3/index.json`" --skip-duplicate"
           dotnet nuget push $path -k "${{ secrets.NUGET_TOKEN }}" -s "https://api.nuget.org/v3/index.json" --skip-duplicate
         }
