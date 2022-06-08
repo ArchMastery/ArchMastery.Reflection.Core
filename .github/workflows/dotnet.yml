@@ -45,6 +45,7 @@ jobs:
       shell: pwsh
       if: ${{ github.event_name == 'release' }}
       run: | 
+        dotnet pack -c Release --no-build --include-symbols --include-source
         $packages = gci *.symbols.nupkg -Directory src\** -Recurse -ErrorAction Stop
 
         echo "Length: ${packages.Length}"
