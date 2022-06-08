@@ -73,7 +73,7 @@ jobs:
       shell: pwsh
       if: ${{ steps.configuration.outputs.value == 'Release' }}
       run: | 
-        $packages = gci *.symbols.nupkg -Path ./artifacts
+        $packages = gci *.symbols.nupkg -Path ./artifacts/
 
         echo "Length: ${packages.Length}"
         
