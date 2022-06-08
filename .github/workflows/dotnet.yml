@@ -4,14 +4,23 @@ on:
   release:
   workflow_dispatch:
 
+env:
+  cond: ${{ github.event_name == 'release' }}
+  if_true: 'Release'
+  if_false: 'Debug'
+  event_name: ${{ github.event_name }}
+  configuration: ${{ global.condval.outputs.value }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      event_name: ${{ github.event_name }}
-      configuration: ${{ if(github.event_name == 'release') { 'Release' } else { 'Debug' } }}
 
     steps:
+    - shell: pwsh
+      run: |
+        Write-Host "`${env:event_name}: [${env:event_name}]"
+        Write-Host "`${env:configuration}: [${env:configuration}]"
+    
     - name: Checkout
       uses: actions/checkout@v1
       
