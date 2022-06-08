@@ -27,6 +27,7 @@ jobs:
       uses: StanleyGoldman/setup-gitversion@v1.0.1
       with:
         run-gitversion: true
+        gitversion-version: 5.10.3
         
     - name: Restore dependencies
       run: dotnet restore
