@@ -45,7 +45,7 @@ jobs:
       shell: pwsh
       if: ${{ github.event_name == 'release' }}
       run: | 
-        $packages - gci *.symbols.nupkg -Directory src\** -ErrorAction Stop
+        $packages = gci *.symbols.nupkg -Directory src\** -ErrorAction Stop
 
         $packages.FullName
         
