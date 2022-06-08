@@ -28,7 +28,7 @@ jobs:
       with:
         run-gitversion: true
         gitversion-version: 5.10.3
-        run-gitversion-args: { "cwd": ""${{ github.workspace }}"" }
+        run-gitversion-args: '{ "cwd": "${{ github.workspace }}" }'
         
     - name: Restore dependencies
       run: dotnet restore
