@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp3.1;netstandard2.0;net5.0;net6.0</TargetFrameworks>
+		<TargetFrameworks>netcoreapp3.1;netstandard2.0;net6.0</TargetFrameworks>
 
 		<Title>Architecture Mastery Restructurizer Output</Title>
 		<Description>Generates Structurizer code by reflecting over Dotnet Assemblies.</Description>
@@ -13,9 +13,8 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<IsPackable>true</IsPackable>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
-		<Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
 		<Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net6.0'" />
 		<Compile Remove="Common\**" />
 		<Compile Remove="obj\**" />
@@ -29,7 +28,7 @@
 		<None Remove="obj\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\ArchMastery.Reflector.Core\ArchMastery.Reflector.Core.csproj" />
+		<ProjectReference Include="..\ArchMastery.Reflector.Core\ArchMastery.Reflector.Common.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="GitVersion.MsBuild" Version="5.10.3">

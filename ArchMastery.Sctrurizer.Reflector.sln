@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{82A4E004
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchMastery.Reflector.Structurizer.xUnit", "tests\PlantUml.Reflector.xUnit\ArchMastery.Reflector.Structurizer.xUnit.csproj", "{AE7B2867-E681-4E5E-BA09-F3816F4B7147}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchMastery.Reflector.Core", "src\ArchMastery.Reflector.Core\ArchMastery.Reflector.Core.csproj", "{F7CE5627-6D1C-4D71-AF56-8BB795196D17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchMastery.Reflector.Common", "src\ArchMastery.Reflector.Core\ArchMastery.Reflector.Common.csproj", "{F7CE5627-6D1C-4D71-AF56-8BB795196D17}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C61213DA-6285-4484-94C9-AC72EED2CBBF}"
 	ProjectSection(SolutionItems) = preProject
